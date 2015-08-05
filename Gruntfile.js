@@ -5,6 +5,17 @@ module.exports = function (grunt) {
   var setup = grunt.file.readJSON(__dirname + '/package.json').setup;
 
   grunt.initConfig({
+    copy: {
+      bootstrapFonts: {
+        files: [{
+          cwd: 'node_modules/bootstrap/fonts/',
+          expand: true,
+          src: ['**/*'],
+          dest: setup.target + '/static/fonts/'
+        }]
+      }
+    },
+
     less: {
       options: {
         paths: ['node_modules']
