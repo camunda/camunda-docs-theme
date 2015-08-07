@@ -2,7 +2,17 @@
 
 ## Install
 
-Clone this repository aside of the docs.camunda.org, go into its directory and run `npm i`.   
+Clone this repository/branch aside of the `docs.camunda.org`
+
+```sh
+# from the docs.camunda.org directory
+cd ..
+git clone git@github.com:camunda/docs.camunda.org.git docs-hugo-theme
+# go into its directory
+cd docs-hugo-theme
+npm i
+```
+
 _Note:_ you can clone this repository anywhere,
 but you may then change the `setup.target` value of `package.json`.
 
