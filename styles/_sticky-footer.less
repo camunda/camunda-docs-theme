@@ -1,44 +1,10 @@
-// html,
-// body {
-//   height: 100%;
-// }
-// body {
-//   margin-top: 0 - @footer-height;
-//   padding-top: @footer-height;
-// }
-
-// .page-wrapper {
-//   min-height: 100%;
-//   /* equal to footer height */
-//   margin-bottom: 0 - @footer-height;
-//   margin-top: (@footer-height - (@navbar-height + 5)) + @grid-gutter-width;
-//   overflow: hidden;
-//   &:after {
-//     content: '';
-//     display: block;
-//     width: 100%;
-//   }
-// }
-
-// .page-footer,
-// .page-wrapper:after {
-//   height: @footer-height + (@grid-gutter-width * 0.5);
-// }
-
-// .page-footer {
-//   background: @navbar-default-bg;
-//   border-top: 1px solid @navbar-default-border;
-//   padding-top: @grid-gutter-width * 0.5;
-//   padding-bottom: @grid-gutter-width * 0.5;
-//   font-size: 90%;
-// }
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  margin: 0 0 @footer-height 0;
+  margin-bottom: @footer-height;
 }
 
 .page-wrapper {
@@ -51,4 +17,9 @@ body {
   bottom: 0;
   width: 100%;
   height: @footer-height;
+  background: @navbar-default-bg;
+  border-top: 1px solid @navbar-default-border;
+  padding-top: @grid-gutter-width * 0.5;
+  padding-bottom: @grid-gutter-width * 0.5;
+  font-size: 90%;
 }

@@ -13,7 +13,9 @@
   }
 
   ul {
+    overflow: hidden;
     list-style: none;
+    .transition(max-height 1s linear);
   }
 
   ul ul {
@@ -24,10 +26,21 @@
   }
 
   li {
-    padding-left: 1em;
+    padding-left: .5em;
+    border-left: 1px solid transparent;
+    margin-left: .5em;
     margin-bottom: 0.3em;
     &:last-child {
       margin-bottom: 0;
+    }
+    > ul {
+      max-height: 0;
+    }
+    &.open {
+      border-left: 1px solid @brand-primary;
+      > ul {
+        max-height: 2000px;
+      }
     }
   }
 
@@ -37,7 +50,7 @@
     > ul {
       margin-left: 0;
       > li {
-        padding-left: 0;
+        margin-left: 0;
       }
     }
   }
