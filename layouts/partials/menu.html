@@ -1,0 +1,9 @@
+<!-- menu start -->
+<ul>
+  {{ $currentNode := . }}
+  {{ range .Site.Menus.main }}
+    {{ partial "menu-node.html" . }}
+  {{end}}
+</ul>
+
+<!-- menu end -->

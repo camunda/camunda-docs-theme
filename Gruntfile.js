@@ -8,10 +8,40 @@ module.exports = function (grunt) {
     copy: {
       bootstrapFonts: {
         files: [{
-          cwd: 'node_modules/bootstrap/fonts/',
+          cwd: 'node_modules/camunda-commons-ui/node_modules/bootstrap/fonts/',
           expand: true,
           src: ['**/*'],
           dest: setup.target + '/static/fonts/'
+        }]
+      },
+      bpmnFonts: {
+        files: [{
+          cwd: 'node_modules/camunda-commons-ui/node_modules/bpmn-font/dist/font/',
+          expand: true,
+          src: ['**/*'],
+          dest: setup.target + '/static/fonts/'
+        }]
+      },
+      layouts: {
+        files: [{
+          cwd: 'layouts/',
+          expand: true,
+          src: ['**/*'],
+          dest: setup.target + '/layouts/'
+        }]
+      },
+      images: {
+        files: [{
+          cwd: 'node_modules/camunda-commons-ui/resources/img/',
+          expand: true,
+          src: ['favicon.ico'],
+          dest: setup.target + '/static/img/'
+        },
+        {
+          cwd: 'images/',
+          expand: true,
+          src: ['**/*'],
+          dest: setup.target + '/static/img/'
         }]
       }
     },
@@ -38,6 +68,10 @@ module.exports = function (grunt) {
     },
 
     watch: {
+      layouts: {
+        files: ['layouts/**/*'],
+        tasks: ['copy:layouts']
+      },
       styles: {
         files: ['styles/**/*.less'],
         tasks: ['less:styles']
@@ -49,7 +83,7 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', ['less:styles', 'browserify:scripts']);
+  grunt.registerTask('build', ['copy', 'less:styles', 'browserify:scripts']);
 
   grunt.registerTask('default', ['build', 'watch']);
 };

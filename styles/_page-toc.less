@@ -1,0 +1,49 @@
+.page-toc {
+  > h3 {
+    margin-top: 0;
+    text-transform: uppercase;
+    font-weight: lighter;
+    font-size: 14px;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul ul {
+    margin-top: 0.3em;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  li {
+    padding-left: 1em;
+    margin-bottom: 0.3em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  nav {
+    padding-left: @grid-gutter-width * .5;
+    border-left: 1px dotted @gray-light;
+    > ul {
+      margin-left: 0;
+      > li {
+        padding-left: 0;
+      }
+    }
+  }
+
+
+  @media (max-width: @screen-sm-max) {
+    display: none;
+  }
+}
