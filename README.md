@@ -10,7 +10,7 @@ cd ..
 git clone git@github.com:camunda/docs.camunda.org.git docs-hugo-theme
 # go into its directory
 cd docs-hugo-theme
-checkout docs-hugo-styling
+git checkout docs-hugo-styling
 npm i
 grunt build
 ```
