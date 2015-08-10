@@ -9,9 +9,10 @@ Clone this repository/branch aside of the `docs.camunda.org`
 cd ..
 git clone git@github.com:camunda/docs.camunda.org.git docs-hugo-theme
 # go into its directory
-checkout docs-hugo-styling
 cd docs-hugo-theme
+checkout docs-hugo-styling
 npm i
+grunt build
 ```
 
 _Note:_ you can clone this repository anywhere,
