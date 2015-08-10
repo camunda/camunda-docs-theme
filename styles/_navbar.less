@@ -1,13 +1,21 @@
+.navbar-fixed-top {
+  padding: 0 (@grid-gutter-width * 0.5);
+}
+
 .navbar-header {
+  width: 100%;
+
   .list-inline {
-    font-size: 16px;
     margin-bottom: 0;
     float: right;
 
     a {
       display: inline-block;
-      line-height: @navbar-height;
       color: @brand-primary;
+      // line-height: @navbar-height;
+      font-size: 16px;
+      margin-top: 14px;
+      font-weight: 100;
     }
 
     li {
@@ -23,20 +31,23 @@
   }
 }
 
-.container-fluid > .navbar-header {
-  margin: 0;
-}
 
 .navbar-text {
+  float: left;
   margin: 0;
   a {
     vertical-align: middle;
-    margin: 0 0 0 -10px;
+    margin: 0;
     display: inline-block;
     text-indent: -99em;
-    width: 184px;
+    width: 156px;
     height: 40px;
-    background: url(../img/logo.png);
+    background: url(../img/logo.png) -8px no-repeat;
+  }
+  @media (max-width: @screen-sm-max) {
+    a {
+      width: 76px;
+    }
   }
 }
 

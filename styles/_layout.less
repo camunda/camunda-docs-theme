@@ -32,6 +32,7 @@ body {
   top: @header-height;
   bottom: @footer-height;
   padding-bottom: @site-menu-meta-closed-height;
+  .transition(transform 0.218s ease);
 
   > .meta {
     position: absolute;
@@ -50,17 +51,21 @@ body {
 .page-footer {
   position: fixed;
   bottom: 0;
+  height: @footer-height;
+  > .container-fluid {
+    padding: @grid-gutter-width * 0.5;
+  }
 }
 
 
-@media screen and (max-width: @screen-sm-max)  {
+@media (max-width: @screen-sm-max)  {
   .site-menu {
     width: 240px;
     z-index: @zindex-navbar-fixed - 1;
     .translate(0 - 240px, 0);
   }
 
-  body.menu-open {
+  body.site-menu-open {
     .site-menu {
       .translate(0, 0);
     }
