@@ -1,4 +1,21 @@
+
+
+
+
 .site-menu {
+  background-color: @gray-lighter;
+  padding-left: 0;
+  padding-right: 0;
+
+  a {
+    &:link {
+      color: @link-color;
+    }
+    &:active {
+      color: @gray;
+    }
+  }
+
   ul,
   li {
     margin: 0;
@@ -7,6 +24,11 @@
 
   ul {
     list-style: none;
+  }
+  > ul {
+    overflow: auto;
+    max-height: 100%;
+    padding-top: 34px;
   }
 
   li {
@@ -36,9 +58,19 @@
     }
   }
 
+  .meta,
   > ul > li {
-    padding: @navbar-padding-vertical 0;
-    border-bottom: 1px solid @gray-lighter;
+    padding: @navbar-padding-vertical (@grid-gutter-width * .5);
+  }
+
+  .meta {
+    background-color: @brand-primary;
+  }
+
+
+  > ul > li {
+    // padding: @navbar-padding-vertical (@grid-gutter-width * .5);
+    border-bottom: 1px solid #fff;
     display: block;
 
     > a {
@@ -52,28 +84,59 @@
       }
     }
 
+    &:last-child {
+      border-bottom: none;
+    }
+
     > ul > li {
       padding-left: 1em;
     }
   }
+}
 
-  @media screen and (max-width: @screen-xs-max)  {
-    position: fixed;
-    top: @header-height;
-    bottom: 0;
-    padding-bottom: @footer-height;
-    background-color: @navbar-default-bg;
-    border-right: 1px solid @navbar-default-border;
-    width: 240px;
-    z-index: @zindex-navbar-fixed - 1;
-    .translate(-240px, 0);
+.site-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  line-height: @navbar-height;
+  vertical-align: middle;
+  width: 26px;
+  padding: 2px 5px;
+  margin-top: 1px;
+  border: 1px solid transparent;
+
+  margin-left: -3px;
+
+  .transition(border-color 0.218s linear);
+  .transition(background-color 0.218s linear);
+
+  > span {
+    display: block;
+    height: 2px;
+    background: @gray;
+    margin-bottom: 3px;
+    .transition(background-color 0.218s linear);
+    &:first-child {
+      margin-top: 3px;
+    }
+  }
+  &:hover {
+    border: 1px solid @gray-lighter;
+    background-color: #fff;
+    > span {
+      background-color: @brand-primary;
+    }
   }
 }
 
 @media screen and (max-width: @screen-xs-max)  {
-  body.menu-open {
-    .site-menu {
-      .translate(0, 0);
-    }
+  .site-menu-toggle {
+    display: inline-block;
+  }
+
+  .site-menu {
+    background-color: @navbar-default-bg;
+    border-right: 1px solid @navbar-default-border;
   }
 }
+

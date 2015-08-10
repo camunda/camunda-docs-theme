@@ -1,17 +1,17 @@
 .navbar-header {
-  width: 100%;
   .list-inline {
     font-size: 16px;
     margin-bottom: 0;
     float: right;
+
     a {
       display: inline-block;
-      // margin-top: 13px;
       line-height: @navbar-height;
       color: @brand-primary;
     }
+
     li {
-      height: 40px;
+      height: @navbar-height;
       padding: 0 (@grid-gutter-width * .5);
       float: left;
       border-right: 1px solid @gray-lighter;
@@ -23,10 +23,16 @@
   }
 }
 
+.container-fluid > .navbar-header {
+  margin: 0;
+}
+
 .navbar-text {
-  margin: 0 0 0 -10px;
+  margin: 0;
   a {
-    display: block;
+    vertical-align: middle;
+    margin: 0 0 0 -10px;
+    display: inline-block;
     text-indent: -99em;
     width: 184px;
     height: 40px;

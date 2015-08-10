@@ -48,6 +48,7 @@ module.exports = function (grunt) {
 
     less: {
       options: {
+        dumpLineNumbers: 'all',
         paths: ['node_modules']
       },
       styles: {

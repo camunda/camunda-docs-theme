@@ -26,17 +26,17 @@ function attr(node, name, value) {
 
 function offset(node) {
   var parent = node;
-  var offset = {
+  var obj = {
     top: parent.offsetTop,
     left: parent.offsetLeft,
   };
 
   while ((parent = parent.offsetParent)) {
-    offset.top += parent.offsetTop;
-    offset.left += parent.offsetLeft;
+    obj.top += parent.offsetTop;
+    obj.left += parent.offsetLeft;
   }
 
-  return offset;
+  return obj;
 }
 
 function query(selector, context) {
@@ -64,7 +64,7 @@ function openParentItem(childItem) {
 
 
 var toc = query('#TableOfContents');
-
+var navBar = query('.navbar-fixed-top');
 var tocLeft = 0;
 var tocWrapper;
 var tocLinks;
@@ -129,3 +129,13 @@ window.addEventListener('resize', function () {
 });
 window.addEventListener('scroll', scrolling);
 scrolling();
+
+function shiftWindow() {
+  if (!navBar) { return; }
+  window.scrollBy(0, 0 - (navBar.clientHeight + 15));
+}
+
+if (location.hash) {
+  shiftWindow();
+}
+window.addEventListener('hashchange', shiftWindow);
