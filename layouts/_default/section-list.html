@@ -8,6 +8,7 @@
 
     <div class="page-content col-xs-12 col-md-offset-3 col-md-9 col-lg-7">
       <h1 class="page-title">{{ .Title }}</h1>
+      {{ partial "edit-on-github.html" . }}
       {{ .Content }}
       {{partial "menu-pages.html" .}}
     </div>

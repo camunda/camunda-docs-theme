@@ -1,7 +1,5 @@
 .site-menu {
   background-color: @gray-lighter;
-  padding-left: 0;
-  padding-right: 0;
 
   a {
     &:link {
@@ -122,6 +120,8 @@
   }
 
   > ul > li > .submenu-toggle {
+    margin-right: -16px;
+
     line-height: 18px;
     height: 18px;
     top: 10px;
@@ -170,8 +170,10 @@
 
   .site-menu {
     background-color: fade(@gray-lighter, 95);
-    // background-color: @navbar-default-bg;
-    // border-right: 1px solid @navbar-default-border;
+  }
+
+  body.site-menu-open .site-menu {
+    box-shadow: 0 0 3px 2px fade(@gray-light, 50);
   }
 }
 

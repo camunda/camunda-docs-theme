@@ -32,6 +32,8 @@ body {
   top: @header-height;
   bottom: @footer-height;
   padding-bottom: @site-menu-meta-closed-height;
+  padding-left: 0;
+  padding-right: 0;
   .transition(transform 0.218s ease);
 
   > .meta {
@@ -52,6 +54,7 @@ body {
   position: fixed;
   bottom: 0;
   height: @footer-height;
+  z-index: @zindex-navbar-fixed;
   > .container-fluid {
     padding: @grid-gutter-width * 0.5;
   }
@@ -65,9 +68,7 @@ body {
     .translate(0 - 240px, 0);
   }
 
-  body.site-menu-open {
-    .site-menu {
-      .translate(0, 0);
-    }
+  body.site-menu-open .site-menu {
+    .translate(0, 0);
   }
 }
