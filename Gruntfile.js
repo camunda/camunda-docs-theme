@@ -22,6 +22,14 @@ module.exports = function (grunt) {
           dest: setup.target + '/static/fonts/'
         }]
       },
+      uiFonts: {
+        files: [{
+          cwd: 'node_modules/camunda-commons-ui/vendor/fonts/',
+          expand: true,
+          src: ['**/*'],
+          dest: setup.target + '/static/fonts/'
+        }]
+      },
       layouts: {
         files: [{
           cwd: 'layouts/',
