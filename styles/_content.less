@@ -1,3 +1,24 @@
+body {
+  .font-regular;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  .font-light;
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+dt,
+label,
+legend {
+  .font-regular;
+}
+
 .page-content {
   padding-bottom: @footer-height + (@grid-gutter-width * .5);
   h1,
@@ -22,8 +43,16 @@ h1.page-title {
 }
 
 
+dt {
+  font-size: 16px;
+}
+dd {
+  margin: 0.5em 0 1em 2em;
+}
+
+
 .edit-on-github {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: @grid-gutter-width * 0.5;
 }
