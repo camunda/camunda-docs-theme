@@ -65,7 +65,6 @@ function openParentItem(childItem) {
 
 var toc = query('#TableOfContents');
 var navBar = query('.navbar-fixed-top');
-var tocLeft = 0;
 var tocWrapper;
 var tocLinks;
 var tocTargets;
@@ -74,19 +73,8 @@ var tocTargetPositions;
 var currentLink = query('.site-menu a[href$="' + location.pathname + '"]');
 var currentMenuItem;
 
-function tocPosition() {
-  if (toc) {
-    attr(tocWrapper, 'style', null);
-    tocLeft = offset(tocWrapper).left;
-    tocWrapper.style.width = tocWrapper.clientWidth + 'px';
-    tocWrapper.style.left = tocLeft + 'px';
-    tocWrapper.style.position = 'fixed';
-  }
-}
-
 if (toc) {
   tocWrapper = toc.parentNode;
-  tocPosition();
 
   tocLinks = queryAll('a[href]', toc);
 
@@ -121,19 +109,11 @@ function setSubmenuClasses(span, nope) {
   }
   var open = span.parentNode.classList.contains('open');
   span.classList[open ? 'add' : 'remove']('open');
-  // if (open) {
-  //   span.classList.add('glyphicon-minus');
-  //   span.classList.remove('glyphicon-plus');
-  // }
-  // else {
-  //   span.classList.remove('glyphicon-minus');
-  //   span.classList.add('glyphicon-plus');
-  // }
 }
 
 function makeToggleBtn(ul) {
   var span = document.createElement('span');
-  span.className = 'submenu-toggle';// glyphicon glyphicon-plus';
+  span.className = 'submenu-toggle';
   span.addEventListener('click', function () {
     setSubmenuClasses(span);
   });
@@ -152,7 +132,6 @@ function scrolling() {
   if (!toc) { return; }
 
   var top = window.scrollY;
-  // toc.parentNode.style.top = (top + tocOffset) + 'px';
 
   tocLinks.forEach(function (node) {
     node.parentNode.classList.remove('open');
@@ -167,9 +146,6 @@ function scrolling() {
   }
 }
 
-window.addEventListener('resize', function () {
-  tocPosition();
-});
 window.addEventListener('scroll', scrolling);
 scrolling();
 

@@ -1,8 +1,5 @@
 .site-menu {
   background-color: @gray-lighter;
-  padding-left: 0;
-  padding-right: 0;
-
 
   ul,
   li {
@@ -47,7 +44,7 @@
 
   .meta,
   > ul > li {
-    padding: @navbar-padding-vertical (@grid-gutter-width * .5);
+    padding: @navbar-padding-vertical (@grid-gutter-width * .5) @navbar-padding-vertical @grid-gutter-width;
   }
 
   .meta {
@@ -114,6 +111,7 @@
     line-height: 18px;
     height: 18px;
     top: 10px;
+    margin-right: -25px;
   }
 }
 
@@ -152,15 +150,13 @@
   }
 }
 
-@media (max-width: @menu-breakpoint) {
+@media (max-width: @site-menu-breakpoint) {
   .site-menu-toggle {
     display: inline-block;
   }
 
   .site-menu {
     background-color: fade(@gray-lighter, 95);
-    // background-color: @navbar-default-bg;
-    // border-right: 1px solid @navbar-default-border;
   }
 }
 

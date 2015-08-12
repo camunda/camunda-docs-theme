@@ -12,10 +12,6 @@ body,
   left: 0;
 }
 
-@site-menu-columns: 3;
-@site-menu-width: percentage((@site-menu-columns / @grid-columns));
-@site-menu-meta-closed-height: 36px;
-
 body {
   padding: @header-height 0 @footer-height 0;
 }
@@ -23,17 +19,20 @@ body {
 .page-wrapper {
   position: absolute;
   top: @header-height;
-  bottom: @footer-height;
+  bottom: 0;
+  padding-left: @site-menu-width + (@grid-gutter-width * 0.5);
+  padding-right: @grid-gutter-width * 0.5;
+  z-index: 1;
 }
 
 .site-menu {
   position: fixed;
   width: @site-menu-width;
   top: @header-height;
-  bottom: @footer-height;
-  padding-bottom: @site-menu-meta-closed-height;
-  padding-left: 0;
-  padding-right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0 0 @site-menu-meta-closed-height 0;
+  z-index: 2;
   .transition(transform 0.218s ease);
 
   > .meta {
@@ -45,30 +44,47 @@ body {
 }
 
 .page-content {
-  padding-bottom: @footer-height + (@grid-gutter-width * .5);
-  max-height: 100%;
-  overflow: auto;
+  max-width: 650px;
+  min-height: 100%;
+  margin-bottom: 0 - (@footer-height + @grid-gutter-width);
+  padding-bottom: @footer-height + @grid-gutter-width;
+}
+
+.page-toc {
+  display: none;
+  position: fixed;
+  width: 240px;
+  top: 81px;
+  left: @site-menu-width + @grid-gutter-width + @page-content-max-width;
 }
 
 .page-footer {
-  position: fixed;
-  bottom: 0;
   height: @footer-height;
-  z-index: @zindex-navbar-fixed;
-  > .container-fluid {
-    padding: @grid-gutter-width * 0.5;
-  }
+  margin-top: @grid-gutter-width;
+  margin-left: 0 - (@grid-gutter-width * 0.5);
+  width: ~"calc(100% + @{grid-gutter-width})";
+  padding: (@grid-gutter-width * 0.5);
 }
 
 
-@media (max-width: @menu-breakpoint)  {
+@media (max-width: @site-menu-breakpoint)  {
   .site-menu {
-    width: 240px;
+    width: @site-menu-width;
     z-index: @zindex-navbar-fixed - 1;
-    .translate(0 - 240px, 0);
+    .translate(0 - @site-menu-width, 0);
+  }
+
+  .page-wrapper {
+    padding-left: @grid-gutter-width * 0.5;
   }
 
   body.site-menu-open .site-menu {
     .translate(0, 0);
+  }
+}
+
+@media (min-width: (@site-menu-width + @grid-gutter-width + @page-content-max-width + @page-toc-width)) {
+  .page-toc {
+    display: block;
   }
 }
