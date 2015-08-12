@@ -40,6 +40,13 @@ legend {
     box-shadow: 0 0 3px 2px fade(@gray-light, 55) inset;
     background-color: @gray-lighter;
   }
+
+}
+.note {
+  padding: @padding-base-vertical @padding-base-horizontal;
+  > h3 {
+    margin-top: @padding-base-vertical;
+  }
 }
 
 
@@ -66,4 +73,25 @@ dt {
 }
 dd {
   margin: 0.5em 0 1em 2em;
+}
+
+
+.gs-download-step-panel {
+  .panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.218s ease, padding 0.218s ease;
+  }
+
+  .toggle-instructions {
+    cursor: pointer;
+  }
+
+  &.open .panel-body {
+    padding-top: @grid-gutter-width * 0.5;
+    padding-bottom: @grid-gutter-width * 0.5;
+    max-height: 500px;
+  }
 }
