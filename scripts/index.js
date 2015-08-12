@@ -49,12 +49,12 @@ function queryAll(selector, context) {
   return toArray(context.querySelectorAll(selector));
 }
 
-function openParentItem(childItem) {
-  childItem.classList.add('open');
+function openParentItem(childItem, className) {
+  childItem.classList.add(className || 'open');
 
   var parentItem = childItem.parentNode.parentNode;
   if (parentItem.tagName.toLowerCase() === 'li') {
-    openParentItem(parentItem);
+    openParentItem(parentItem, className);
   }
 }
 
@@ -89,7 +89,9 @@ if (toc) {
 
 if (currentLink) {
   currentMenuItem = currentLink.parentNode;
+  currentMenuItem.classList.add('active');
   openParentItem(currentLink.parentNode);
+  openParentItem(currentLink.parentNode, 'active-trail');
 }
 
 

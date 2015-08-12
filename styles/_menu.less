@@ -21,7 +21,6 @@
     padding-left: 1em;
     display: none;
 
-
     &.open > ul {
       margin-top: 0.3em;
       &:first-child {
@@ -31,6 +30,13 @@
       > li {
         display: block;
       }
+    }
+
+    &.active-trail {
+      background-color: #fff;
+    }
+    &.active > a {
+      color: @gray;
     }
   }
 
