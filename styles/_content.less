@@ -27,11 +27,23 @@ legend {
     color: @gray-light;
     font-weight: lighter;
   }
+
+  figure.image > img,
   p > img {
     margin: auto;
     max-width: 100%;
     display: block;
+    // border: 1px solid #fff;
+    // box-shadow: 0 0 3px 2px fade(@gray-light, 55);
   }
+
+  figure.image {
+    padding: @grid-gutter-width * 0.5;
+    box-shadow: 0 0 3px 2px fade(@gray-light, 55) inset;
+    background-color: @gray-lighter;
+  }
+}
+
 
 .content-header {
   position: relative;
@@ -56,11 +68,4 @@ dt {
 }
 dd {
   margin: 0.5em 0 1em 2em;
-}
-
-
-.edit-on-github {
-  position: absolute;
-  top: 5px;
-  right: @grid-gutter-width * 0.5;
 }
