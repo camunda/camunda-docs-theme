@@ -19,6 +19,8 @@ legend {
   .font-regular;
 }
 
+@import (inline) "highlight.js/styles/tomorrow.css";
+
 .page-content {
   h1,
   h2,
@@ -54,7 +56,15 @@ legend {
     background-color: @gray-lighter;
   }
 
+
+  .menu-pages {
+    border-top: 1px dotted @gray-lighter;
+    padding-top: @grid-gutter-width * .5;
+    margin-top: @grid-gutter-width * .5;
+  }
 }
+
+
 .note {
   padding: @padding-base-vertical @padding-base-horizontal;
   > h3 {

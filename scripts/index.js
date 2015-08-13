@@ -170,3 +170,9 @@ queryAll('.gs-download-step-panel').forEach(function (panel) {
 // queryAll('.page-content img').forEach(function (img) {
 //   console.info(img.clientWidth, img.naturalWidth);
 // });
+
+
+var hljs = require('highlight.js');
+queryAll('code[class^=language]').forEach(function (el) {
+  hljs.highlightBlock(el.parentNode);
+});
