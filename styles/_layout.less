@@ -38,8 +38,39 @@ body {
   > .meta {
     position: absolute;
     width: 100%;
-    height: @site-menu-meta-closed-height;
     bottom: 0;
+    max-height: @site-menu-meta-closed-height;
+    transition: max-height 0.218s ease;
+
+    &.open {
+      max-height: 300px;
+    }
+
+    .header,
+    .toggle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: @site-menu-meta-closed-height;
+      line-height: @site-menu-meta-closed-height;
+    }
+
+    .header {
+      width: 100%;
+      text-align: center;
+      padding-left: @grid-gutter-width;
+      border-bottom: 1px solid draken(@brand-primary, 50);
+      cursor: pointer;
+    }
+
+    .toggle {
+      width: @grid-gutter-width;
+    }
+
+    .content {
+      margin-top: @site-menu-meta-closed-height;
+      min-height: 200px;
+    }
   }
 }
 

@@ -51,9 +51,9 @@ legend {
   }
 
   figure.image {
-    padding: @grid-gutter-width * 0.5;
-    box-shadow: 0 0 3px 2px fade(@gray-light, 55) inset;
-    background-color: @gray-lighter;
+    .clickable {
+      cursor: pointer;
+    }
   }
 
 
@@ -62,13 +62,12 @@ legend {
     padding-top: @grid-gutter-width * .5;
     margin-top: @grid-gutter-width * .5;
   }
-}
 
-
-.note {
-  padding: @padding-base-vertical @padding-base-horizontal;
-  > h3 {
-    margin-top: @padding-base-vertical;
+  table {
+    font-size: 12px;
+  }
+  th {
+    .font-bold;
   }
 }
 
@@ -100,7 +99,50 @@ dd {
 }
 
 
+.gs-download-step-panel,
+.note,
+figure.image,
+pre[class^="language-"],
+pre[class*="language-"] {
+  margin: (@grid-gutter-width * .5) @grid-gutter-width;
+}
+
+.note {
+  padding: @padding-base-vertical @padding-base-horizontal;
+  border-left: 5px solid @gray-light;
+
+  > h3 {
+    margin-top: @padding-base-vertical;
+    font-size: 16px;
+    .font-regular;
+  }
+
+  &.docs-primary {
+    border-left-color: @brand-primary;
+  }
+  &.docs-success {
+    border-left-color: @brand-success;
+  }
+  &.docs-info {
+    border-left-color: @brand-info;
+  }
+  &.docs-warning {
+    border-left-color: @brand-warning;
+  }
+  &.docs-danger {
+    border-left-color: @brand-danger;
+  }
+}
+
+
 .gs-download-step-panel {
+  border-left: 5px solid @brand-success;
+
+  .panel-heading h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
   .panel-body {
     padding-top: 0;
     padding-bottom: 0;
@@ -117,5 +159,35 @@ dd {
     padding-top: @grid-gutter-width * 0.5;
     padding-bottom: @grid-gutter-width * 0.5;
     max-height: 500px;
+  }
+}
+
+
+.lightbox {
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 100%;
+  transition: bottom 0.218s ease;
+  background-color: fade(@gray, 80);
+  z-index: @zindex-navbar-fixed + 9;
+
+  .content {
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    background-color: #fff;
+  }
+
+  &.open {
+    bottom: 0;
   }
 }
