@@ -172,7 +172,18 @@ queryAll('.gs-download-step-panel').forEach(function (panel) {
 // });
 
 
-var hljs = require('highlight.js');
-queryAll('code[class^=language]').forEach(function (el) {
-  hljs.highlightBlock(el.parentNode);
-});
+
+
+var prismjs = window.prismjs = require('prismjs');
+require('prismjs/components/prism-bash');
+require('prismjs/components/prism-css');
+require('prismjs/components/prism-css-extras');
+require('prismjs/components/prism-git');
+require('prismjs/components/prism-http');
+require('prismjs/components/prism-java');
+require('prismjs/components/prism-less');
+require('prismjs/components/prism-markup');
+require('prismjs/components/prism-yaml');
+prismjs.languages.js = prismjs.languages.javascript;
+prismjs.languages.xml = prismjs.languages.markup;
+prismjs.languages.html = prismjs.languages.markup;
