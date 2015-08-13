@@ -25,7 +25,20 @@ legend {
   h3,
   h4 {
     color: @gray-light;
-    font-weight: lighter;
+  }
+
+  h2 {
+    margin-top: @padding-base-vertical * 6;
+  }
+  h3 {
+    margin-top: @padding-base-vertical * 5;
+  }
+  h4 {
+    margin-top: @padding-base-vertical * 4;
+  }
+
+  p {
+    margin: (@padding-base-vertical * 2) 0;
   }
 
   figure.image > img,
@@ -64,7 +77,8 @@ h1.page-title {
   color: @gray;
   padding-bottom: 10px;
   border-bottom: 1px solid @gray-light;
-  margin-bottom: @grid-gutter-width;// * .5;
+  margin-bottom: @grid-gutter-width * .5;
+  margin-top: @grid-gutter-width * 1.5;
 }
 
 

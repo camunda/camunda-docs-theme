@@ -20,8 +20,8 @@ body {
   position: absolute;
   top: @header-height;
   bottom: 0;
-  padding-left: @site-menu-width + (@grid-gutter-width * 0.5);
-  padding-right: @grid-gutter-width * 0.5;
+  padding-left: @site-menu-width + (@grid-gutter-width * 2);
+  padding-right: @grid-gutter-width * 2;
   z-index: 1;
 }
 
@@ -54,15 +54,15 @@ body {
   display: none;
   position: fixed;
   width: @page-toc-width;
-  top: 81px;
-  left: @site-menu-width + @grid-gutter-width + @page-content-max-width;
+  top: 106px;
+  left: @site-menu-width + (@grid-gutter-width * 4) + @page-content-max-width;
 }
 
 .page-footer {
   height: @footer-height;
   margin-top: @grid-gutter-width;
-  margin-left: 0 - (@grid-gutter-width * 0.5);
-  width: ~"calc(100% + @{grid-gutter-width})";
+  margin-left: 0 - (@grid-gutter-width * 2);
+  width: ~"calc(100% + (@{grid-gutter-width} * 4))";
   padding: (@grid-gutter-width * 0.5);
 }
 

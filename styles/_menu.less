@@ -1,5 +1,6 @@
 .site-menu {
-  background-color: @gray-lighter;
+  background-color: @navbar-default-bg;
+  border-right: 1px solid @navbar-default-border;
 
   ul,
   li {
@@ -12,8 +13,24 @@
   }
   > ul {
     overflow: auto;
-    max-height: 100%;
-    padding-top: 24px;
+    max-height: ~"calc(100% - 49px)";
+  }
+  > .version {
+    height: 49px;
+    line-height: 32px;
+    padding: 0 (@grid-gutter-width * .5) 17px @grid-gutter-width;
+    .font-bold;
+
+    > span {
+      width: 50%;
+      float: left;
+    }
+
+    .number {
+      text-decoration: underline;
+      text-align: right;
+      cursor: pointer;
+    }
   }
 
   li {
@@ -36,7 +53,8 @@
       background-color: #fff;
     }
     &.active > a {
-      color: @gray;
+      .font-bold;
+      color: @gray-light;
     }
   }
 

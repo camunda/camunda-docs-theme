@@ -167,3 +167,6 @@ queryAll('.gs-download-step-panel').forEach(function (panel) {
   });
 });
 
+// queryAll('.page-content img').forEach(function (img) {
+//   console.info(img.clientWidth, img.naturalWidth);
+// });
