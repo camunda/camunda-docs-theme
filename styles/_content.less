@@ -43,7 +43,7 @@ legend {
     margin: (@padding-base-vertical * 2) 0;
   }
 
-  figure.image > img,
+  figure.image img,
   p > img {
     margin: auto;
     max-width: 100%;
@@ -51,9 +51,53 @@ legend {
   }
 
   figure.image {
-    .clickable {
-      cursor: pointer;
+    text-align: center;
+    > span {
+      max-width: 100%;
+      border: 1px solid @gray-light;
+      padding: 3px;
+      display: block;
+      margin: auto;
     }
+  }
+
+  figure.clickable {
+    position: relative;
+    overflow: hidden;
+    &:before,
+    &:after {
+      display: block;
+      position: absolute;
+    }
+
+    &:before {
+      width: @grid-gutter-width;
+      height: @grid-gutter-width;
+      top: 3px;
+      right: 3px;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      content: '\e015';
+      z-index: 2;
+      color: #fff;
+    }
+    &:after {
+      width: @grid-gutter-width * 2.6;
+      height: @grid-gutter-width * 2.6;
+      top: 0 - (@grid-gutter-width * 1.3);
+      right: 0 - (@grid-gutter-width * 1.3);
+      content: '';
+      z-index: 1;
+      background-color: fade(@gray, 50);
+      transform: rotateZ(45deg);
+    }
+
+    cursor: pointer;
   }
 
 
@@ -205,12 +249,16 @@ pre[class*="language-"] {
   transition: bottom 0.218s ease;
   background-color: fade(@gray, 80);
   z-index: @zindex-navbar-fixed + 9;
+  cursor: pointer;
 
   .content {
     max-width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
+    border: 1px solid @gray-light;
+    padding: 3px;
+    background-color: #fff;
   }
 
   img {
