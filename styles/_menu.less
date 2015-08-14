@@ -2,19 +2,6 @@
   background-color: @navbar-default-bg;
   border-right: 1px solid @navbar-default-border;
 
-  ul,
-  li {
-    margin: 0;
-    padding: 0;
-  }
-
-  ul {
-    list-style: none;
-  }
-  > ul {
-    overflow: auto;
-    max-height: ~"calc(100% - 49px)";
-  }
   > .version {
     height: 49px;
     line-height: 32px;
@@ -33,21 +20,33 @@
     }
   }
 
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  > ul {
+    overflow: auto;
+    max-height: ~"calc(100% - 49px)";
+
+    ul {
+      max-height: 0;
+      transition: max-height 0.218s linear;
+      overflow: hidden;
+    }
+
+    li.open > ul {
+      max-height: 1000px;
+    }
+  }
+
   li {
     position: relative;
-    padding-left: 1em;
-    display: none;
-
-    &.open > ul {
-      margin-top: 0.3em;
-      &:first-child {
-        margin-top: 0;
-      }
-
-      > li {
-        display: block;
-      }
-    }
 
     &.active-trail {
       background-color: #fff;
@@ -122,7 +121,7 @@
       display: block;
       transition: background-color 0.218s ease;
       &:hover {
-        background-color: #fff; //@gray-lighter;
+        background-color: #fff;
       }
     }
 
@@ -137,10 +136,6 @@
 
     &:last-child {
       border-bottom: none;
-    }
-
-    > ul > li {
-      padding-left: 1em;
     }
   }
 
@@ -194,15 +189,15 @@
 
   margin-left: -5px;
 
-  .transition(border-color 0.218s linear);
-  .transition(background-color 0.218s linear);
+  transition: border-color 0.218s linear;
+  transition: background-color 0.218s linear;
 
   > span {
     display: block;
     height: 2px;
     background: @gray;
     margin-bottom: 3px;
-    .transition(background-color 0.218s linear);
+    transition: background-color 0.218s linear;
     &:first-child {
       margin-top: 3px;
     }
