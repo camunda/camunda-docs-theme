@@ -67,13 +67,37 @@
   }
 
   .meta,
-  > ul > li {
+  > ul > li > a {
     padding: @navbar-padding-vertical (@grid-gutter-width * .5) @navbar-padding-vertical @grid-gutter-width;
   }
+
 
   .meta {
     background-color: @brand-primary;
     color: #fff;
+    > .header {
+      border-bottom: 1px solid darken(@brand-primary, 10);
+      cursor: pointer;
+      margin: 0;
+      font-size: 14px;
+      line-height: @site-menu-meta-closed-height;
+      text-transform: uppercase;
+      transition: background-color 0.218s ease;
+      &:hover {
+        background-color: darken(@brand-primary, 5);
+      }
+    }
+    .toggle {
+      background-color: darken(@brand-primary, 5);
+      line-height: @site-menu-meta-closed-height;
+      text-align: center;
+      &:before {
+        margin-left: -2px;
+      }
+    }
+    > .content {
+      margin-left: 0 - (@grid-gutter-width * 0.5);
+    }
   }
 
 
@@ -81,15 +105,33 @@
     border-bottom: 1px solid #fff;
     display: block;
 
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+
+    > ul {
+      padding-left: @grid-gutter-width;
+    }
+
     > a {
       font-size: 18px;
       color: @brand-primary;
       .font-light;
+      width: 100%;
+      position: relative;
+      display: block;
+      transition: background-color 0.218s ease;
+      &:hover {
+        background-color: #fff; //@gray-lighter;
+      }
     }
 
     &.open {
       > a {
         color: @gray;
+      }
+      > ul {
+        margin-bottom: 0.6em;
       }
     }
 
