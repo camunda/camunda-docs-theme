@@ -101,16 +101,23 @@ body {
     .translate(0 - @site-menu-width, 0);
   }
 
+  body.site-menu-open .site-menu {
+    .translate(0, 0);
+  }
+
   .page-content {
     max-width: none;
   }
 
   .page-wrapper {
     padding-left: @grid-gutter-width * 0.5;
+    padding-right: @grid-gutter-width * 0.5;
   }
 
-  body.site-menu-open .site-menu {
-    .translate(0, 0);
+  .page-footer {
+    width: ~"calc(100% + (@{grid-gutter-width} * 1))";
+    margin-left: -15px;
+    margin-right: 0;
   }
 }
 

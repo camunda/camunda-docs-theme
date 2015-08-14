@@ -176,46 +176,7 @@
   }
 }
 
-.site-menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  line-height: @navbar-height;
-  vertical-align: middle;
-  width: 26px;
-  padding: 2px 5px;
-  margin-top: 1px;
-  border: 1px solid transparent;
-
-  margin-left: -5px;
-
-  transition: border-color 0.218s linear;
-  transition: background-color 0.218s linear;
-
-  > span {
-    display: block;
-    height: 2px;
-    background: @gray;
-    margin-bottom: 3px;
-    transition: background-color 0.218s linear;
-    &:first-child {
-      margin-top: 3px;
-    }
-  }
-  &:hover {
-    border: 1px solid @gray-lighter;
-    background-color: #fff;
-    > span {
-      background-color: @brand-primary;
-    }
-  }
-}
-
 @media (max-width: @site-menu-breakpoint) {
-  .site-menu-toggle {
-    display: inline-block;
-  }
-
   .site-menu {
     background-color: fade(@gray-lighter, 95);
   }
