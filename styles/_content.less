@@ -109,7 +109,24 @@ pre[class*="language-"] {
 
 .note {
   padding: @padding-base-vertical @padding-base-horizontal;
-  border-left: 5px solid @gray-light;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  border: 1px solid @gray-light;
+  font-size: 13px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0 - (@grid-gutter-width * 0.5);
+    left: 0 - (@grid-gutter-width * 0.5);
+
+    background-color: @gray-light;
+    width: @grid-gutter-width;
+    height: @grid-gutter-width;
+    transform: rotateZ(45deg);
+  }
 
   > h3 {
     margin-top: @padding-base-vertical;
@@ -118,19 +135,34 @@ pre[class*="language-"] {
   }
 
   &.docs-primary {
-    border-left-color: @brand-primary;
+    border-color: @brand-primary;
+    &:before {
+      background-color: @brand-primary;
+    }
   }
   &.docs-success {
-    border-left-color: @brand-success;
+    border-color: @brand-success;
+    &:before {
+      background-color: @brand-success;
+    }
   }
   &.docs-info {
-    border-left-color: @brand-info;
+    border-color: @brand-info;
+    &:before {
+      background-color: @brand-info;
+    }
   }
   &.docs-warning {
-    border-left-color: @brand-warning;
+    border-color: @brand-warning;
+    &:before {
+      background-color: @brand-warning;
+    }
   }
   &.docs-danger {
-    border-left-color: @brand-danger;
+    border-color: @brand-danger;
+    &:before {
+      background-color: @brand-danger;
+    }
   }
 }
 
