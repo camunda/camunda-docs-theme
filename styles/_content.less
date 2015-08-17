@@ -1,5 +1,7 @@
 body {
   .font-regular;
+  // font-family: Georgia, serif;
+  // font-weight: normal;
 }
 
 h1,
@@ -22,25 +24,33 @@ legend {
 @import (inline) "prismjs/themes/prism.css";
 
 .page-content {
+  font-size: 17px;
+  line-height: 28px;
+
+
   h1,
   h2,
   h3,
   h4 {
-    color: @gray-light;
+    color: #000;
   }
 
+  h1 {
+    margin-top: @padding-base-vertical * 8;
+  }
   h2 {
-    margin-top: @padding-base-vertical * 6;
+    margin-top: @padding-base-vertical * 7;
   }
   h3 {
-    margin-top: @padding-base-vertical * 5;
+    margin-top: @padding-base-vertical * 6;
   }
   h4 {
-    margin-top: @padding-base-vertical * 4;
+    margin-top: @padding-base-vertical * 5;
   }
 
   p {
     margin: (@padding-base-vertical * 2) 0;
+    line-height: 160%;
   }
 
   figure.image img,
@@ -64,6 +74,8 @@ legend {
   figure.clickable {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+
     &:before,
     &:after {
       display: block;
@@ -96,8 +108,6 @@ legend {
       background-color: fade(@gray, 50);
       transform: rotateZ(45deg);
     }
-
-    cursor: pointer;
   }
 
 
@@ -112,6 +122,13 @@ legend {
   }
   th {
     .font-bold;
+  }
+
+  .dl-horizontal {
+    dt {
+      white-space: normal;
+      margin-top: -3px;
+    }
   }
 }
 
@@ -136,7 +153,8 @@ h1.page-title {
 
 
 dt {
-  font-size: 16px;
+  font-size: 110%;
+  // font-size: 16px;
 }
 dd {
   margin: 0.5em 0 1em 2em;
@@ -269,5 +287,67 @@ pre[class*="language-"] {
 
   &.open {
     bottom: 0;
+  }
+}
+
+
+code {
+  color: @gray-dark;
+}
+
+.docs-intro {
+  padding: 0 (@grid-gutter-width * 0.5);
+  font-size: 120%;
+}
+
+#camunda-logo-animated {
+  // max-width: 100%;
+  // min-width: 100%;
+
+  float: left;
+  max-width: 25%;
+  margin: 0 (@grid-gutter-width * 0.5) (@grid-gutter-width * 0.5) 0;
+
+  path {
+    transform: translate(0, 0);
+    fill: fade(@brand-primary, 0);
+    stroke-dashoffset: 0;
+    stroke-dasharray: 0;
+  }
+
+  #in-path {
+    animation: dash-in 3s linear forwards;
+    stroke-dasharray: 921;
+    stroke-dashoffset: 921;
+  }
+
+  #out-path {
+    animation: dash-out 3s linear forwards;
+    stroke-dasharray: 241;
+    stroke-dashoffset: 241;
+  }
+}
+
+
+
+@keyframes dash-in {
+  75% {
+    stroke-dashoffset: 0;
+    fill: fade(@brand-primary, 0);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: @brand-primary;
+  }
+}
+
+@keyframes dash-out {
+  75% {
+    stroke-dashoffset: 0;
+    fill: fade(@brand-primary, 0);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: @brand-primary;
   }
 }

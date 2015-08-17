@@ -47,13 +47,11 @@
 
   li {
     position: relative;
-
     &.active-trail {
       background-color: #fff;
     }
     &.active > a {
-      .font-bold;
-      color: @gray-light;
+      color: #000;
     }
   }
 
@@ -65,38 +63,13 @@
     }
   }
 
+  ul ul ul {
+    margin-top: 0.3em;
+  }
+
   .meta,
   > ul > li > a {
     padding: @navbar-padding-vertical (@grid-gutter-width * .5) @navbar-padding-vertical @grid-gutter-width;
-  }
-
-
-  .meta {
-    background-color: @brand-primary;
-    color: #fff;
-    > .header {
-      border-bottom: 1px solid darken(@brand-primary, 10);
-      cursor: pointer;
-      margin: 0;
-      font-size: 14px;
-      line-height: @site-menu-meta-closed-height;
-      text-transform: uppercase;
-      transition: background-color 0.218s ease;
-      &:hover {
-        background-color: darken(@brand-primary, 5);
-      }
-    }
-    .toggle {
-      background-color: darken(@brand-primary, 5);
-      line-height: @site-menu-meta-closed-height;
-      text-align: center;
-      &:before {
-        margin-left: -2px;
-      }
-    }
-    > .content {
-      margin-left: 0 - (@grid-gutter-width * 0.5);
-    }
   }
 
 
@@ -127,7 +100,7 @@
 
     &.open {
       > a {
-        color: @gray;
+        color: #000;
       }
       > ul {
         margin-bottom: 0.6em;
@@ -173,6 +146,34 @@
     height: 18px;
     top: 10px;
     margin-right: -25px;
+  }
+
+  .meta {
+    background-color: @brand-primary;
+    color: #fff;
+    > .header {
+      border-bottom: 1px solid darken(@brand-primary, 10);
+      cursor: pointer;
+      margin: 0;
+      font-size: 14px;
+      line-height: @site-menu-meta-closed-height;
+      text-transform: uppercase;
+      transition: background-color 0.218s ease;
+      &:hover {
+        background-color: darken(@brand-primary, 5);
+      }
+    }
+    .toggle {
+      background-color: darken(@brand-primary, 5);
+      line-height: @site-menu-meta-closed-height;
+      text-align: center;
+      &:before {
+        margin-left: -2px;
+      }
+    }
+    > .content {
+      margin-left: 0 - (@grid-gutter-width * 0.5);
+    }
   }
 }
 
