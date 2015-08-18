@@ -121,6 +121,12 @@ a {
       content: '\e140';
       z-index: 2;
       color: #fff;
+
+      transition: font-size 0.128s ease,
+                  top 0.128s ease,
+                  right 0.128s ease,
+                  width 0.128s ease,
+                  height 0.128s ease;
     }
     &:after {
       width: @grid-gutter-width * 2.6;
@@ -131,6 +137,14 @@ a {
       z-index: 1;
       background-color: fade(@link-color, 90);
       transform: rotateZ(45deg);
+    }
+
+    &:hover:before {
+      width: @grid-gutter-width + 4;
+      height: @grid-gutter-width + 4;
+      top: 0px;
+      right: 0px;
+      font-size: 22px;
     }
   }
 
@@ -305,7 +319,7 @@ pre[class*="language-"] {
   top: 0;
   bottom: 100%;
   transition: bottom 0.218s ease;
-  background-color: fade(@gray, 80);
+  background-color: fade(@gray-lighter, 80);
   z-index: @zindex-navbar-fixed + 9;
   cursor: pointer;
 
@@ -317,6 +331,7 @@ pre[class*="language-"] {
     border: 1px solid @gray-light;
     padding: 3px;
     background-color: #fff;
+    box-shadow: 0 0 15px 5px fade(#000, 50);
   }
 
   img {
