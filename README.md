@@ -23,6 +23,22 @@ but you may then change the `setup.target` value of `package.json`.
 After installing (you probably want to have [hugo running as watching server][building-docs])
 and then use `grunt` in this directory.
 
+## Consuming the theme
+
+The simplest way to consume the theme in a project is to use the git subtree facilitites:
+
+Adding the latest version of the theme as `camunda`:
+
+```bash
+git subtree add -P themes/camunda git@github.com:camunda/camunda-docs-theme.git master --squash
+```
+
+Updating the theme to the latest version:
+
+```bash
+git subtree pull -P themes/camunda git@github.com:camunda/camunda-docs-theme.git master --squash
+```
+
 ## Licence
 
 [MIT](LICENSE)
