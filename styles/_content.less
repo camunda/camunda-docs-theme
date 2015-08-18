@@ -21,6 +21,28 @@ legend {
   .font-regular;
 }
 
+a {
+  display: inline-block;
+  text-decoration: none;
+
+  &:after {
+    margin-top: -3px;
+    display: block;
+    content: '';
+    height: 1px;
+    width: 0%;
+    transition: width 0.218s ease;
+    border-bottom: 1px solid;
+  }
+
+  &:hover {
+    text-decoration: none;
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
 .page-content {
   // font-family: Georgia,Cambria,"Times New Roman",Times,serif;
   font-size: 17px;
