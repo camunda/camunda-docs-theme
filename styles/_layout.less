@@ -96,6 +96,7 @@ body {
 
 @media (max-width: @site-menu-breakpoint)  {
   .site-menu {
+    top: @header-height + 30px;
     width: @site-menu-width;
     z-index: @zindex-navbar-fixed - 1;
     .translate(0 - @site-menu-width, 0);
@@ -110,6 +111,7 @@ body {
   }
 
   .page-wrapper {
+    top: @header-height + 30px;
     padding-left: 0;
     padding-right: 0;
   }
