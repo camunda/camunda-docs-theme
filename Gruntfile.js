@@ -5,13 +5,22 @@ module.exports = function (grunt) {
   var setup = grunt.file.readJSON(__dirname + '/package.json').setup;
 
   grunt.initConfig({
+    setup: setup,
+
     copy: {
+      themeInfo: {
+        files: [{
+          expand: true,
+          src: ['theme.toml', 'LICENSE'],
+          dest: '<%= setup.target %>/'
+        }]
+      },
       bootstrapFonts: {
         files: [{
           cwd: 'node_modules/camunda-commons-ui/node_modules/bootstrap/fonts/',
           expand: true,
           src: ['**/*'],
-          dest: setup.target + '/static/fonts/'
+          dest: '<%= setup.target %>/static/fonts/'
         }]
       },
       bpmnFonts: {
@@ -19,7 +28,7 @@ module.exports = function (grunt) {
           cwd: 'node_modules/camunda-commons-ui/node_modules/bpmn-font/dist/font/',
           expand: true,
           src: ['**/*'],
-          dest: setup.target + '/static/fonts/'
+          dest: '<%= setup.target %>/static/fonts/'
         }]
       },
       uiFonts: {
@@ -27,7 +36,7 @@ module.exports = function (grunt) {
           cwd: 'node_modules/camunda-commons-ui/vendor/fonts/',
           expand: true,
           src: ['**/*'],
-          dest: setup.target + '/static/fonts/'
+          dest: '<%= setup.target %>/static/fonts/'
         }]
       },
       docsFonts: {
@@ -35,7 +44,7 @@ module.exports = function (grunt) {
           cwd: 'fonts/',
           expand: true,
           src: ['**/*', '!config.json'],
-          dest: setup.target + '/static/fonts/'
+          dest: '<%= setup.target %>/static/fonts/'
         }]
       },
       layouts: {
@@ -43,7 +52,7 @@ module.exports = function (grunt) {
           cwd: 'layouts/',
           expand: true,
           src: ['**/*'],
-          dest: setup.target + '/layouts/'
+          dest: '<%= setup.target %>/layouts/'
         }]
       },
       images: {
@@ -51,13 +60,13 @@ module.exports = function (grunt) {
           cwd: 'node_modules/camunda-commons-ui/resources/img/',
           expand: true,
           src: ['favicon.ico'],
-          dest: setup.target + '/static/img/'
+          dest: '<%= setup.target %>/static/img/'
         },
         {
           cwd: 'images/',
           expand: true,
           src: ['**/*'],
-          dest: setup.target + '/static/img/'
+          dest: '<%= setup.target %>/static/img/'
         }]
       }
     },
@@ -70,7 +79,7 @@ module.exports = function (grunt) {
       styles: {
         files: [{
           src: ['styles/docs.less'],
-          dest: setup.target + '/static/css/docs.css'
+          dest: '<%= setup.target %>/static/css/docs.css'
         }]
       }
     },
@@ -79,7 +88,7 @@ module.exports = function (grunt) {
       scripts: {
         files: [{
           src: ['scripts/index.js'],
-          dest: setup.target + '/static/js/docs.js'
+          dest: '<%= setup.target %>/static/js/docs.js'
         }]
       }
     },
@@ -97,10 +106,79 @@ module.exports = function (grunt) {
         files: ['scripts/**/*.js'],
         tasks: ['browserify:scripts']
       }
+    },
+
+    // -----------------------------------------------
+
+    clean: ['.tmp'],
+
+    gitclone: {
+      dist: {
+        options: {
+          directory: '.tmp',
+          repository: 'git@github.com:camunda/camunda-docs-theme.git',
+
+        }
+      }
+    },
+
+    gitcheckout: {
+      dist: {
+        options: {
+          cwd: '.tmp',
+          branch: 'dist'
+        }
+      }
+    },
+
+    gitadd: {
+      dist: {
+        options: {
+          all: true
+        }
+      }
+    },
+
+    gitcommit: {
+      dist: {
+        options: {
+          message: 'chore(update): publish new version of theme',
+          noStatus: true,
+          allowEmpty: true
+        }
+      }
+    },
+
+    gitpush: {
+      dist: {
+        options: {
+          remote: 'origin',
+          branch: 'dist'
+        }
+      }
     }
   });
 
   grunt.registerTask('build', ['copy', 'less:styles', 'browserify:scripts']);
+
+  grunt.registerTask('optimize', []);
+
+  grunt.registerTask('push', [
+  ]);
+
+  grunt.registerTask('publish', function () {
+    grunt.config.set('setup.target', '.tmp');
+    grunt.task.run([
+      'clean',
+      'gitclone:dist',
+      'gitcheckout:dist',
+      'build',
+      'optimize',
+      'gitadd:dist',
+      'gitcommit:dist',
+      'gitpush:dist'
+    ]);
+  });
 
   grunt.registerTask('default', ['build', 'watch']);
 };
