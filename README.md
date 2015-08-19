@@ -30,13 +30,13 @@ The simplest way to consume the theme in a project is to use the git subtree fac
 Adding the latest version of the theme as `camunda`:
 
 ```bash
-git subtree add -P themes/camunda git@github.com:camunda/camunda-docs-theme.git master --squash
+git subtree add -P themes/camunda git@github.com:camunda/camunda-docs-theme.git dist --squash
 ```
 
 Updating the theme to the latest version:
 
 ```bash
-git subtree pull -P themes/camunda git@github.com:camunda/camunda-docs-theme.git master --squash
+git subtree pull -P themes/camunda git@github.com:camunda/camunda-docs-theme.git dist --squash
 ```
 
 ## Licence
