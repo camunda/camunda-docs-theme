@@ -108,6 +108,24 @@ module.exports = function (grunt) {
       }
     },
 
+    cssmin: {
+      styles: {
+        files: [{
+          src: '<%= setup.target %>/static/css/docs.css',
+          dest: '<%= setup.target %>/static/css/docs.css'
+        }]
+      }
+    },
+
+    uglify: {
+      scripts: {
+        files: [{
+          src: '<%= setup.target %>/static/js/docs.js',
+          dest: '<%= setup.target %>/static/js/docs.js'
+        }]
+      }
+    },
+
     // -----------------------------------------------
 
     clean: ['.tmp'],
@@ -134,6 +152,7 @@ module.exports = function (grunt) {
     gitadd: {
       dist: {
         options: {
+          cwd: '.tmp',
           all: true
         }
       }
@@ -142,6 +161,7 @@ module.exports = function (grunt) {
     gitcommit: {
       dist: {
         options: {
+          cwd: '.tmp',
           message: 'chore(update): publish new version of theme',
           noStatus: true,
           allowEmpty: true
@@ -152,6 +172,7 @@ module.exports = function (grunt) {
     gitpush: {
       dist: {
         options: {
+          cwd: '.tmp',
           remote: 'origin',
           branch: 'dist'
         }
@@ -161,13 +182,15 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', ['copy', 'less:styles', 'browserify:scripts']);
 
-  grunt.registerTask('optimize', []);
-
-  grunt.registerTask('push', [
+  grunt.registerTask('optimize', [
+    'uglify:scripts',
+    'cssmin:styles'
   ]);
 
   grunt.registerTask('publish', function () {
     grunt.config.set('setup.target', '.tmp');
+    grunt.config.set('setup.minify', true);
+
     grunt.task.run([
       'clean',
       'gitclone:dist',
