@@ -239,3 +239,12 @@ prismjs.languages.json = prismjs.languages.javascript;
 prismjs.languages.js = prismjs.languages.javascript;
 prismjs.languages.xml = prismjs.languages.markup;
 prismjs.languages.html = prismjs.languages.markup;
+
+
+queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
+  if (!heading.id) { return; }
+  var link = document.createElement('a');
+  link.href = '#' + heading.id;
+  link.className = 'content-anchor glyphicon glyphicon-link';
+  heading.appendChild(link);
+});

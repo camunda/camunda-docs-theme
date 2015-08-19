@@ -73,6 +73,39 @@ a {
     margin: (@padding-base-vertical * 2) 0;
   }
 
+  a.content-anchor {
+    font-size: 0.7em;
+    color: inherit;
+    text-decoration: none;
+    color: mix(@link-color, @gray-lighter);
+    &:after {
+      display: none;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    position: relative;
+    > .content-anchor {
+      transition: color 0.218s ease;
+      position: absolute;
+      right: 100%;
+      top: .3em;
+      padding-right: 5px;
+    }
+
+    &:hover {
+      > .content-anchor {
+        color: @link-color;
+      }
+    }
+  }
+
+
   figure.image img,
   p > img {
     margin: auto;
