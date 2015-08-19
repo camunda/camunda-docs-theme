@@ -1,0 +1,22 @@
+{
+  "name": "cam-docs",
+  "css_prefix_text": "cam-docs-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "d94334f23acba022bfd68e49d76b31bb",
+      "css": "github",
+      "code": 59392,
+      "src": "entypo"
+    },
+    {
+      "uid": "d090355c31f497b61d676416c1fd39fb",
+      "css": "twitter",
+      "code": 59393,
+      "src": "entypo"
+    }
+  ]
+}

@@ -213,8 +213,40 @@ legend {
 
 .edit-on-github {
   position: absolute;
-  top: 3px;
   right: @grid-gutter-width * .5;
+  top: 0;
+  padding: 1px 6px 0 6px;
+  background-color: @gray-lighter;
+  font-size: 14px;
+  border-radius: 0 0 6px 6px;
+  // box-shadow: 0 0 3px 1px fade(@gray-light, 50);
+
+  a:after {
+    display: none;
+  }
+
+  span,
+  i {
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  i {
+    transition: max-width 0.218s ease,
+                // box-shadow 0.218s ease,
+                margin 0.218s ease;
+    display: inline-block;
+    max-width: 0;
+    overflow: hidden;
+    margin-left: -3px;
+  }
+  &:hover {
+    i {
+      margin-left: 3px;
+      max-width: 120px;
+    }
+  }
 }
 
 h1.page-title {

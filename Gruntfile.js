@@ -30,6 +30,14 @@ module.exports = function (grunt) {
           dest: setup.target + '/static/fonts/'
         }]
       },
+      docsFonts: {
+        files: [{
+          cwd: 'fonts/',
+          expand: true,
+          src: ['**/*', '!config.json'],
+          dest: setup.target + '/static/fonts/'
+        }]
+      },
       layouts: {
         files: [{
           cwd: 'layouts/',
