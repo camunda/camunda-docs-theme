@@ -228,6 +228,14 @@ if (versionLink) {
 }
 metaHeader.addEventListener('click', toggleMenuMeta);
 
+var versionSelect = query('.site-menu .meta select');
+if (versionSelect) {
+  versionSelect.addEventListener('change', function () {
+    var dest = attr(versionSelect, 'data-basepath') + '/' + versionSelect.value;
+    location.pathname = dest;
+  });
+}
+
 
 var prismjs = require('prismjs');
 require('prismjs/components/prism-bash');
