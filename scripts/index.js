@@ -221,7 +221,11 @@ function toggleMenuMeta() {
     tcl.remove('glyphicon-chevron-down');
   }
 }
-query('.site-menu .version a').addEventListener('click', toggleMenuMeta);
+
+var versionLink = query('.site-menu .version a');
+if (versionLink) {
+  versionLink.addEventListener('click', toggleMenuMeta);
+}
 metaHeader.addEventListener('click', toggleMenuMeta);
 
 
