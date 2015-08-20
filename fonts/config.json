@@ -17,6 +17,18 @@
       "css": "twitter",
       "code": 59393,
       "src": "entypo"
+    },
+    {
+      "uid": "a8ed7903f8f548da5a8084e1773f0bbb",
+      "css": "chat",
+      "code": 59395,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "e7d17d4d07756f4ab5eb690eea1275ca",
+      "css": "stackoverflow",
+      "code": 59394,
+      "src": "zocial"
     }
   ]
 }
