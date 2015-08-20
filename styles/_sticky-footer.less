@@ -1,5 +1,25 @@
 .page-footer {
-  background: @navbar-default-bg;
-  border-top: 1px solid @navbar-default-border;
+  overflow: visible;
+  position: relative;
   font-size: 90%;
+
+  p {
+    line-height: 1.6;
+  }
+
+  > .row {
+    background: @navbar-default-bg;
+    border-top: 1px solid @navbar-default-border;
+    position: absolute;
+    bottom: 0;
+    max-height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: max-height 0.218s ease;
+    &:hover {
+      max-height: 80px;
+    }
+  }
 }
