@@ -274,8 +274,31 @@ dd {
 .note,
 figure.image,
 pre[class^="language-"],
-pre[class*="language-"] {
+pre[class*="language-"],
+pre.console {
   margin: (@grid-gutter-width * .5) @grid-gutter-width;
+}
+
+
+pre.console {
+  background-color: @gray-dark;
+  color: desaturate(lighten(green, 20), 15);
+  padding: (@grid-gutter-width * 0.5) 0;
+  // box-shadow: 0 0 3px 1px @gray-light inset;
+  border: 1px solid black;
+  border-radius: 3px;
+  .line {
+    min-height: 1.2em;
+    display: block;
+    padding: 0.4em (@grid-gutter-width * 0.5);
+    &:nth-child(odd) {
+      background-color: lighten(@gray-dark, 3);
+    }
+    &:last-child {
+      display: none;
+      margin-bottom: 0;
+    }
+  }
 }
 
 .note {
