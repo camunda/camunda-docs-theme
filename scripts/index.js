@@ -265,7 +265,14 @@ queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (hea
   heading.appendChild(link);
 });
 
-var BPMNViewer = require('camunda-commons-ui/vendor/bpmn-viewer');
+var BPMNViewer = require('bpmn-js');
+
+function fitBpmnViewport(el, viewer) {
+  var vb = viewer.get('canvas').viewbox();
+  el.style.height = vb.outer.height + 'px';
+  el.style.width = vb.outer.width + 'px';
+  viewer.get('canvas').zoom('fit-viewport');
+}
 
 queryAll('[data-bpmn-diagram]').forEach(function (el) {
   var src = attr(el, 'data-bpmn-diagram');
@@ -285,7 +292,7 @@ queryAll('[data-bpmn-diagram]').forEach(function (el) {
     if (err) { throw err; }
     viewer.importXML(body, function(err) {
       if (err) { throw err; }
-
+      fitBpmnViewport(el, viewer);
     });
   });
 
