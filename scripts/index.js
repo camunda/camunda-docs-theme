@@ -253,9 +253,9 @@ prismjs.languages.xml = prismjs.languages.markup;
 prismjs.languages.html = prismjs.languages.markup;
 
 
-queryAll('pre.console').forEach(function (el) {
-  el.innerHTML = '<span class="line">' + el.textContent.replace(/\n/g, '</span><span class="line">') + '</span>';
-});
+// queryAll('pre.console').forEach(function (el) {
+//   el.innerHTML = '<span class="line">' + el.textContent.replace(/\n/g, '</span><span class="line">') + '</span>';
+// });
 
 queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
   if (!heading.id) { return; }
