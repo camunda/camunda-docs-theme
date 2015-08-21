@@ -298,7 +298,62 @@ queryAll('[data-bpmn-symbol]').forEach(function (el) {
 
 
 
+query('#docs-site-search').addEventListener('change', function(evt) {
 
+  var search = evt.target.value;
+  if(search.trim().length == 0) {
+    return;
+  }
+  
+  var searchUri = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyBsU6PGxJQkqGVSZvmij5dZWt-pnJVLFsg&cx=007121298374582869478:yaec0vxmc7e&q=';
+  searchUri += search;
+
+  xhr({
+    uri: searchUri,
+    headers: {
+      "Accept": "application/json"
+    }
+  }, function (err, resp, body) {
+    if(err) {
+      console.log(err);
+      // todo: error handling
+      return;
+    }
+    var results = JSON.parse(body);
+
+    var resultsContainer = query('#docs-search-results');
+    var renderedResults = '';
+
+    if(!!results.items) {
+      var items = results.items;
+
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        renderedResults += '<div>';
+        
+        renderedResults += '<h2><a href="';
+        renderedResults += item.link;
+        renderedResults += '">';
+        renderedResults += item.title
+        renderedResults += '</a></h2>';
+
+        renderedResults += '<p>';
+        renderedResults += item.htmlSnippet;
+        renderedResults += '</p>';
+
+        renderedResults += '</div>';
+      };
+      
+    }
+    else {
+      renderedResults += 'no results';
+    }
+
+    resultsContainer.innerHTML = renderedResults;
+
+  });
+
+});
 
 
 
