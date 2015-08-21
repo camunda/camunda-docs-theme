@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/camunda/docs.camunda.org.git"
+    "url": "https://github.com/camunda/camunda-docs-manual.git"
   },
   "keywords": [
     "camunda"
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/camunda/camunda-hugo-theme",
   "setup": {
-    "target": "./../docs.camunda.org/themes/camunda"
+    "target": "./../camunda-docs-manual/themes/camunda"
   },
   "devDependencies": {
     "camunda-commons-ui": "camunda/camunda-commons-ui#9a1aed5b77176b1d4c3438a6dce4dc434c1b6b72",
