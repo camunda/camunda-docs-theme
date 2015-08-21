@@ -2,7 +2,7 @@
 /*jshint browser: true*/
 
 /*global require: false, console: false*/
-
+var xhr = require('xhr');
 require('./classList');
 
 function toArray(thing) {
@@ -264,3 +264,61 @@ queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (hea
   link.className = 'content-anchor glyphicon glyphicon-link';
   heading.appendChild(link);
 });
+
+var BPMNViewer = require('camunda-commons-ui/vendor/bpmn-viewer');
+
+queryAll('[data-bpmn-diagram]').forEach(function (el) {
+  var src = attr(el, 'data-bpmn-diagram');
+
+  var viewer = new BPMNViewer({
+    container: el,
+    width: '100%',
+    height: '100%',
+    overlays: {
+      deferUpdate: false
+    }
+  });
+
+  xhr({
+    uri: src + '.bpmn',
+  }, function (err, resp, body) {
+    if (err) { throw err; }
+    viewer.importXML(body, function(err) {
+      if (err) { throw err; }
+
+    });
+  });
+
+});
+
+queryAll('[data-bpmn-symbol]').forEach(function (el) {
+  var name = attr(el, 'data-bpmn-symbol');
+  console.info('bpmn symbol', name);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var _gaq = window._gaq || [];
+// var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+// _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+// _gaq.push(['_setAccount', 'UA-39060941-1']);
+// _gaq.push(['_setDomainName', 'camunda.org']);
+// _gaq.push(['_trackPageview']);
+
+// (function() {
+//   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+//   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+//   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+// })();
