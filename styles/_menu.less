@@ -3,19 +3,29 @@
   border-right: 1px solid @navbar-default-border;
 
   > .version {
-    height: 49px;
+    height: 32px;
     line-height: 32px;
-    padding: 0 (@grid-gutter-width * .5) 17px @grid-gutter-width;
-    .font-bold;
+    padding: 0 (@grid-gutter-width * 0.5) 7px (@grid-gutter-width * 0.5);
+    margin: 0 (@grid-gutter-width * 0.5) 16px (@grid-gutter-width * 0.5);
+    background-color: #fff;
 
     > span {
       width: 50%;
       float: left;
     }
 
+    .name {
+      .font-bold;
+      text-align: right;
+      padding-right: 0.3em;
+      &:after {
+        content: ':';
+      }
+    }
+
     .number {
       text-decoration: underline;
-      text-align: right;
+      text-align: left;
       cursor: pointer;
     }
   }
