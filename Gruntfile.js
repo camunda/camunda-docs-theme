@@ -4,6 +4,8 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   var setup = grunt.file.readJSON(__dirname + '/package.json').setup;
 
+  setup.target = process.env.THEME_TARGET || setup.target;
+
   grunt.initConfig({
     setup: setup,
 
