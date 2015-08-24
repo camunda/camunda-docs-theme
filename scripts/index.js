@@ -70,6 +70,15 @@ function openParentItem(childItem, className) {
 
 
 
+
+
+
+
+
+
+
+
+
 var toc = query('#TableOfContents');
 var navBar = query('.navbar-fixed-top');
 var tocWrapper;
@@ -113,18 +122,32 @@ if (siteMenuToggle) {
 var siteMenuSubmenus = queryAll('.site-menu ul ul');
 
 function setSubmenuClasses(span, nope) {
+  var li = span.parentNode;
+
   if (!nope) {
-    span.parentNode.classList.toggle('open');
+    li.classList.toggle('open');
   }
-  var open = span.parentNode.classList.contains('open');
-  span.classList[open ? 'add' : 'remove']('open');
 }
 
 function makeToggleBtn(ul) {
-  var span = mkEl('span');
-  span.className = 'submenu-toggle';
+  var span = mkEl('span', {'class': 'submenu-toggle'});
+
   span.addEventListener('click', function () {
     setSubmenuClasses(span);
+    var li = span.parentNode;
+
+    toArray(li.parentNode.childNodes).forEach(function (el) {
+      if (!el.tagName) { return; }
+      if (el !== li) {
+        el.classList.remove('open');
+        queryAll('li.open', el).forEach(function (subli) {
+          subli.classList.remove('open');
+        });
+      }
+      else {
+        el.classList.add('open');
+      }
+    });
   });
 
   ul.parentNode.insertBefore(span, ul);
@@ -135,6 +158,18 @@ siteMenuSubmenus.forEach(function (ul) {
   var toggleBtn = makeToggleBtn(ul);
   setSubmenuClasses(toggleBtn, true);
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function scrolling() {
@@ -169,6 +204,17 @@ if (location.hash) {
 window.addEventListener('hashchange', shiftWindow);
 
 
+
+
+
+
+
+
+
+
+
+
+
 queryAll('.gs-download-step-panel').forEach(function (panel) {
   var btn = query('.toggle-instructions', panel);
   if (!btn) { return; }
@@ -176,6 +222,16 @@ queryAll('.gs-download-step-panel').forEach(function (panel) {
     panel.classList.toggle('open');
   });
 });
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -214,6 +270,15 @@ queryAll('.page-content figure.image img').forEach(function (img) {
   }
 });
 
+
+
+
+
+
+
+
+
+
 var siteMenuMeta = query('.site-menu .meta');
 var metaToggle = query('.toggle', siteMenuMeta);
 var metaHeader = query('.header', siteMenuMeta);
@@ -247,6 +312,14 @@ if (versionSelect) {
 }
 
 
+
+
+
+
+
+
+
+
 var prismjs = require('prismjs');
 require('prismjs/components/prism-bash');
 require('prismjs/components/prism-css');
@@ -272,6 +345,19 @@ queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (hea
 
   heading.appendChild(link);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var BPMNViewer = require('bpmn-js');
 
@@ -306,10 +392,25 @@ queryAll('[data-bpmn-diagram]').forEach(function (el) {
 
 });
 
+
+
+
+
+
+
+
 queryAll('[data-bpmn-symbol]').forEach(function (el) {
   var name = attr(el, 'data-bpmn-symbol');
   console.info('bpmn symbol', name);
 });
+
+
+
+
+
+
+
+
 
 var searchResultTmpl = require('lodash.template')(
   '<li>' +

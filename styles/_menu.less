@@ -70,6 +70,8 @@
   }
 
   .site-menu-items {
+    overflow: auto;
+    max-height: ~"calc(100% - 49px)";
     > li {
       border-bottom: 1px solid #fff;
       display: block;
@@ -112,11 +114,6 @@
         border-bottom: none;
       }
     }
-  }
-
-  .site-menu-items {
-    overflow: auto;
-    max-height: ~"calc(100% - 49px)";
 
     ul {
       max-height: 0;
@@ -125,7 +122,7 @@
     }
 
     li.open > ul {
-      max-height: 1000px;
+      max-height: 10000px;
     }
   }
 
@@ -151,10 +148,11 @@
 
       content: '+';
     }
-    &.open {
-      &:before {
-        content: '-';
-      }
+  }
+
+  .open > .submenu-toggle {
+    &:before {
+      content: '-';
     }
   }
 
