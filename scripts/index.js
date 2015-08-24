@@ -24,6 +24,16 @@ function attr(node, name, value) {
   return node.getAttribute(name);
 }
 
+function mkEl(name, attrs) {
+  var el = document.createElement(name);
+  if (attrs) {
+    Object.keys(attrs).forEach(function (name) {
+      attr(el, name, attrs[name]);
+    });
+  }
+  return el;
+}
+
 function offset(node) {
   var parent = node;
   var obj = {
@@ -111,7 +121,7 @@ function setSubmenuClasses(span, nope) {
 }
 
 function makeToggleBtn(ul) {
-  var span = document.createElement('span');
+  var span = mkEl('span');
   span.className = 'submenu-toggle';
   span.addEventListener('click', function () {
     setSubmenuClasses(span);
@@ -169,16 +179,16 @@ queryAll('.gs-download-step-panel').forEach(function (panel) {
 
 
 
-var lightbox = document.createElement('div');
-var lightboxContent = document.createElement('div');
-var lightboxImg = document.createElement('img');
+var lightbox = mkEl('div', {'class': 'lightbox'});
+var lightboxContent = mkEl('div', {'class': 'content'});
+var lightboxImg = mkEl('img');
 lightbox.appendChild(lightboxContent);
 lightbox.addEventListener('click', function () {
   lightbox.classList.remove('open');
 });
 lightboxContent.appendChild(lightboxImg);
-attr(lightbox, 'class', 'lightbox');
-attr(lightboxContent, 'class', 'content');
+
+
 
 document.body.appendChild(lightbox);
 
@@ -253,15 +263,13 @@ prismjs.languages.xml = prismjs.languages.markup;
 prismjs.languages.html = prismjs.languages.markup;
 
 
-// queryAll('pre.console').forEach(function (el) {
-//   el.innerHTML = '<span class="line">' + el.textContent.replace(/\n/g, '</span><span class="line">') + '</span>';
-// });
-
 queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
   if (!heading.id) { return; }
-  var link = document.createElement('a');
-  link.href = '#' + heading.id;
-  link.className = 'content-anchor glyphicon glyphicon-link';
+  var link = mkEl('a', {
+    href: '#' + heading.id,
+    className: 'content-anchor glyphicon glyphicon-link'
+  });
+
   heading.appendChild(link);
 });
 
