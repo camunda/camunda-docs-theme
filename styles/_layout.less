@@ -87,12 +87,12 @@ body {
 
 .page-footer {
   height: @footer-height;
-  margin-top: @grid-gutter-width;
-  margin-left: 0 - (@grid-gutter-width * 1);
-  width: ~"calc(100% + (@{grid-gutter-width} * 2))";
+  width: ~"calc(100% - @{site-menu-width})";
   padding: (@grid-gutter-width * 0.5);
+  position: fixed;
+  bottom: 0;
+  margin-left: @site-menu-width;
 }
-
 
 @media (max-width: @site-menu-breakpoint)  {
   .site-menu {
