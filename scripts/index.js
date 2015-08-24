@@ -5,6 +5,13 @@
 var xhr = require('xhr');
 require('./classList');
 
+
+
+
+/********************************************************************\
+ * DOM utilities                                                    *
+\********************************************************************/
+
 function toArray(thing) {
   var arr = [];
   if (!thing.length) { return arr; }
@@ -77,6 +84,9 @@ function openParentItem(childItem, className) {
 
 
 
+/********************************************************************\
+ * tic tac TOC                                                      *
+\********************************************************************/
 
 
 var toc = query('#TableOfContents');
@@ -103,6 +113,11 @@ if (toc) {
   });
 }
 
+
+/********************************************************************\
+ * Active menu link                                                 *
+\********************************************************************/
+
 if (currentLink) {
   currentMenuItem = currentLink.parentNode;
   currentMenuItem.classList.add('active');
@@ -111,6 +126,9 @@ if (currentLink) {
 }
 
 
+/********************************************************************\
+ * Open menu section                                                *
+\********************************************************************/
 
 var siteMenuToggle = query('.site-menu-toggle');
 if (siteMenuToggle) {
@@ -170,7 +188,9 @@ siteMenuSubmenus.forEach(function (ul) {
 
 
 
-
+/********************************************************************\
+ * Page scrolling and anchor links                                  *
+\********************************************************************/
 
 function scrolling() {
   if (!toc) { return; }
@@ -214,6 +234,9 @@ window.addEventListener('hashchange', shiftWindow);
 
 
 
+/********************************************************************\
+ * Tutorial download boxes                                          *
+\********************************************************************/
 
 queryAll('.gs-download-step-panel').forEach(function (panel) {
   var btn = query('.toggle-instructions', panel);
@@ -234,6 +257,9 @@ queryAll('.gs-download-step-panel').forEach(function (panel) {
 
 
 
+/********************************************************************\
+ * Images / lightbox                                                *
+\********************************************************************/
 
 var lightbox = mkEl('div', {'class': 'lightbox'});
 var lightboxContent = mkEl('div', {'class': 'content'});
@@ -278,6 +304,9 @@ queryAll('.page-content figure.image img').forEach(function (img) {
 
 
 
+/********************************************************************\
+ * Menu meta nav                                                    *
+\********************************************************************/
 
 var siteMenuMeta = query('.site-menu .meta');
 var metaToggle = query('.toggle', siteMenuMeta);
@@ -319,6 +348,9 @@ if (versionSelect) {
 
 
 
+/********************************************************************\
+ * Code highlighting                                                *
+\********************************************************************/
 
 var prismjs = require('prismjs');
 require('prismjs/components/prism-bash');
@@ -358,6 +390,9 @@ queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (hea
 
 
 
+/********************************************************************\
+ * No clue...                                                       *
+\********************************************************************/
 
 var BPMNViewer = require('bpmn-js');
 
@@ -389,7 +424,6 @@ queryAll('[data-bpmn-diagram]').forEach(function (el) {
       fitBpmnViewport(el, viewer);
     });
   });
-
 });
 
 
@@ -411,6 +445,9 @@ queryAll('[data-bpmn-symbol]').forEach(function (el) {
 
 
 
+/********************************************************************\
+ * Search                                                           *
+\********************************************************************/
 
 var searchResultTmpl = require('lodash.template')(
   '<li>' +
@@ -424,16 +461,87 @@ var searchResultTmpl = require('lodash.template')(
   '</li>'
 );
 
-var searchUri = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyBsU6PGxJQkqGVSZvmij5dZWt-pnJVLFsg&cx=007121298374582869478:yaec0vxmc7e&q=';
-var searchField = query('input[type=search]');
+var gSearchApiKey = 'AIzaSyBsU6PGxJQkqGVSZvmij5dZWt-pnJVLFsg';
+var gSearchCtx = '007121298374582869478:yaec0vxmc7e';
 var bodyClasses = document.body.classList;
-var searchCloseBtn = query('.search-results .search-close');
+var searchUri = 'https://www.googleapis.com/customsearch/v1?key=' + gSearchApiKey + '&cx=' + gSearchCtx + '&q=';
+var searchField = query('input[type=search]');
+var searchResults = query('.search-results');
+var searchCloseBtn = query('.search-close', searchResults);
+var pageButtons = queryAll('button.page');
+
 
 searchCloseBtn.addEventListener('click', function (evt) {
   evt.preventDefault();
   bodyClasses.remove('search-open');
   searchField.value = '';
 });
+
+pageButtons.forEach(function (btn) {
+  btn.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    var searched = attr(btn, 'data-searched');
+    var startIndex = attr(btn, 'data-start-index');
+    performSearch(searchUri + searched/* + '&startIndex=' + startIndex*/ + '&start=' + startIndex);
+  });
+});
+
+
+function performSearch(uri) {
+  pageButtons.forEach(function (el) {
+    attr(el, 'disabled', 'disabled');
+    attr(el, 'data-searched', null);
+    attr(el, 'data-start-index', null);
+  });
+
+  xhr({
+    uri: uri,
+    headers: {
+      'Accept': 'application/json'
+    }
+  }, function (err, resp, body) {
+    var resultsContainer = query('ul', searchResults);
+    var renderedResults = '';
+
+    if(err) {
+      console.error('google custom search', err.message);
+      resultsContainer.innerHTML = '<li class="search-error">' + err.message + '</li>';
+    }
+    else {
+      var results = JSON.parse(body);
+
+      if (results.items && results.items.length) {
+        renderedResults = results.items.map(function (item) {
+          if (!item.pagemap) {
+            return '';
+          }
+          return searchResultTmpl(item);
+        }).join('');
+
+        var previous = results.queries.previousPage ? results.queries.previousPage[0] : false;
+        if (previous) {
+          attr(pageButtons[0], 'disabled', null);
+          attr(pageButtons[0], 'data-searched', previous.searchTerms);
+          attr(pageButtons[0], 'data-start-index', previous.startIndex);
+        }
+
+        var next = results.queries.nextPage ? results.queries.nextPage[0] : false;
+        if (next) {
+          attr(pageButtons[1], 'disabled', null);
+          attr(pageButtons[1], 'data-searched', next.searchTerms);
+          attr(pageButtons[1], 'data-start-index', next.startIndex);
+        }
+      }
+      else {
+        renderedResults += '<li class="no-results">no results</li>';
+      }
+    }
+
+    resultsContainer.innerHTML = renderedResults;
+
+    bodyClasses.add('search-open');
+  });
+}
 
 searchField.addEventListener('change', function(evt) {
   evt.preventDefault();
@@ -445,44 +553,7 @@ searchField.addEventListener('change', function(evt) {
   }
   bodyClasses.add('search-open');
 
-  searchUri += search;
-
-  xhr({
-    uri: searchUri,
-    headers: {
-      'Accept': 'application/json'
-    }
-  }, function (err, resp, body) {
-    var resultsContainer = query('.search-results ul');
-    var renderedResults = '';
-
-    if(err) {
-      console.log(err);
-      // todo: error handling
-      resultsContainer.innerHTML = '<li class="search-error">' + err.message + '</li>';
-    }
-    else {
-      var results = JSON.parse(body);
-
-      console.info('results', results);
-
-      if (results.items && results.items.length) {
-        renderedResults = results.items.map(function (item) {
-          if (!item.pagemap) {
-            return '';
-          }
-          return searchResultTmpl(item);
-        }).join('');
-      }
-      else {
-        renderedResults += '<li class="no-results">no results</li>';
-      }
-    }
-
-    resultsContainer.innerHTML = renderedResults;
-
-    bodyClasses.add('search-open');
-  });
+  performSearch(searchUri + search);
 });
 
 
@@ -492,6 +563,9 @@ searchField.addEventListener('change', function(evt) {
 
 
 
+/********************************************************************\
+ * Spying                                                           *
+\********************************************************************/
 
 
 
