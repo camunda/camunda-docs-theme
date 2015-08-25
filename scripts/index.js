@@ -398,9 +398,15 @@ var BPMNViewer = require('bpmn-js');
 
 function fitBpmnViewport(el, viewer) {
   var vb = viewer.get('canvas').viewbox();
-  el.style.height = vb.outer.height + 'px';
-  el.style.width = vb.outer.width + 'px';
-  viewer.get('canvas').zoom('fit-viewport');
+  var inner = vb.inner;
+
+  el.style.height = Math.round(inner.height * (el.clientWidth / inner.width)) + 'px';
+
+  var canvas = viewer.get('canvas');
+  canvas.zoom('fit-viewport');
+  setTimeout(function () {
+    canvas.zoom('fit-viewport');
+  }, 10);
 }
 
 queryAll('[data-bpmn-diagram]').forEach(function (el) {
