@@ -570,6 +570,36 @@ searchField.addEventListener('change', function(evt) {
 
 
 /********************************************************************\
+ * Downloads                                                        *
+\********************************************************************/
+
+queryAll('[data-select]').forEach(function (select) {
+  var selector = attr(select, 'data-select');
+  select.classList.remove('nojs');
+
+  var links = queryAll('li', select);
+  links.forEach(function (li) {
+    li.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      var selected = li.className.replace(' active', '');
+
+      [].concat(links, queryAll(selector, select.parentNode)).forEach(function (el) {
+        var list = el.classList;
+        if (list.contains(selected)) {
+          if (!list.contains('active')) {
+            list.add('active');
+          }
+        }
+        else if (list.contains('active')) {
+          list.remove('active');
+        }
+      });
+    });
+  });
+});
+
+
+/********************************************************************\
  * Spying                                                           *
 \********************************************************************/
 

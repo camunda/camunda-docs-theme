@@ -1,0 +1,117 @@
+.cam-downloads {
+  background-color: @gray-lighter;
+  padding: (@grid-gutter-width * 0.5);
+  overflow: hidden;
+  display: table;
+  width: 100%;
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul.application-servers {
+    width: 33%;
+    display: table-cell;
+
+    li {
+      padding: @padding-base-vertical @padding-base-horizontal;
+      transition: background-color 0.218s ease;
+      position: relative;
+      cursor: pointer;
+      &:hover a:after {
+        width: 100%;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        margin-top: 0;
+        border-top: 0 solid transparent;
+        border-bottom: 0 solid transparent;
+        border-left: 0 solid @brand-primary;
+        position: absolute;
+        top: 50%;
+        left: 100%;
+
+        transition: border 0.218s ease;
+      }
+
+      &.active {
+        background-color: @brand-primary;
+
+        a {
+          color: @body-bg;
+        }
+
+        &:after {
+          left: 100%;
+          margin-top: -12px;
+          border-top: 12px solid transparent;
+          border-bottom: 12px solid transparent;
+          border-left: 12px solid @brand-primary;
+        }
+      }
+    }
+  }
+
+  div.application-server {
+    padding: @padding-base-vertical (@grid-gutter-width * 0.5);
+    width: 67%;
+    display: none;
+    background-color: @body-bg;
+    vertical-align: top;
+
+    &.active {
+      display: table-cell;
+    }
+
+    h3 {
+      margin-top: 0;
+      display: none;
+    }
+
+    ul {
+      width: 100%;
+      display: table;
+    }
+
+    li {
+      display: table-cell;
+      // text-align: center;
+      &.active a:after {
+        width: 100%;
+      }
+    }
+  }
+
+  .version {
+    display: none;
+    margin-top: (@grid-gutter-width * 0.5);
+    padding-top: (@grid-gutter-width * 0.5);
+    border-top: 1px dotted @gray-light;
+
+    &.active {
+      display: block;
+    }
+
+    h4 {
+      .font-bold;
+      span {
+        .font-light;
+      }
+    }
+  }
+
+  div.help {
+    background-color: transparent;
+    color: @gray-light;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
