@@ -214,15 +214,25 @@ blockquote {
   position: relative;
 }
 
-.edit-on-github {
+
+
+
+
+
+
+
+.edit-on-github,
+.social {
   position: absolute;
-  right: @grid-gutter-width * .5;
   top: 0;
-  padding: 1px 6px 0 6px;
   background-color: @gray-lighter;
   font-size: 14px;
   border-radius: 0 0 6px 6px;
-  // box-shadow: 0 0 3px 1px fade(@gray-light, 50);
+  padding: 1px 6px 0 6px;
+}
+
+.edit-on-github {
+  right: @grid-gutter-width * .5;
 
   a:after {
     display: none;
@@ -237,7 +247,6 @@ blockquote {
 
   i {
     transition: max-width 0.218s ease,
-                // box-shadow 0.218s ease,
                 margin 0.218s ease;
     display: inline-block;
     max-width: 0;
@@ -249,6 +258,18 @@ blockquote {
       margin-left: 3px;
       max-width: 120px;
     }
+  }
+}
+
+.social {
+  left: 15px;
+  list-style: none;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -438,7 +459,6 @@ pre.console {
     bottom: 0;
   }
 }
-
 
 code {
   color: @gray-dark;

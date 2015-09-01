@@ -1,5 +1,5 @@
 .navbar-fixed-top {
-  padding: 0 (@grid-gutter-width * 0.5);
+  padding: 0;
   background-color: @brand-primary;
   color: #fff;
 
@@ -8,36 +8,105 @@
   }
 }
 
-.navbar-text {
-  float: left;
-  margin: 0;
 
-  a {
+.navbar-container {
+  width: 100%;
+  height: @navbar-height;
+
+  > div,
+  > ul {
+    padding: 0;
+    height: @navbar-height;
     line-height: @navbar-height;
-    font-size: 28px;
-    text-decoration: none;
   }
 
-  .icon:before {
+  .navbar-header,
+  .main-menu {
+    float: left;
+  }
+
+  .search-field {
+    float: right;
+    padding-right: (@grid-gutter-width * 0.5);
+  }
+
+  ul {
+    list-style: none;
     margin: 0;
   }
 
-  @media (max-width: @site-menu-breakpoint) {
+
+  li {
+    margin: 0;
+    padding: 0;
+    float: left;
+  }
+
+  .navbar-text {
+    margin: 0 (@grid-gutter-width * 0.5) 0 0;
+    vertical-align: middle;
+    height: @navbar-height;
+
+    a,
+    a span {
+      height: @navbar-height;
+      vertical-align: middle;
+    }
+
     a {
-      font-size: 18px;
+      display: inline-block;
+      height: @navbar-height;
+      line-height: @navbar-height;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    button {
+      vertical-align: middle;
+    }
+
+    .icon {
+      position: relative;
+      font-size: 22px;
+      top: -2px;
+    }
+  }
+
+  .main-menu {
+    a {
+      display: inline-block;
+      padding: 0 (@grid-gutter-width * 0.5);
+    }
+
+    li {
+      border-left: 1px solid @body-bg;
+
+      &:hover,
+      &.active {
+        a {
+          text-decoration: underline;
+          background-color: darken(@brand-primary, 10%);
+        }
+      }
+
+      &:first-of-type {
+        border: none;
+      }
     }
   }
 }
 
 
+
 .site-menu-toggle {
   display: none;
   background: none;
-  position: relative;
-  top: 2px;
 
   width: 26px;
   padding: 2px 5px;
+  margin-left: 10px;
 
   border: 1px solid transparent;
 
@@ -68,101 +137,22 @@
   }
 }
 
-.navbar {
-  margin-bottom: 0;
-
-  .social,
-  .main-menu {
-    .list-inline;
-    margin-bottom: 0;
-    float: right;
-    font-size: 16px;
-    a {
-      height: @navbar-height;
-      line-height: @navbar-height;
-      display: inline-block;
-      font-weight: 100;
-    }
-  }
-
-  .social {
-    margin-left: @grid-gutter-width;
-
-    li {
-      float: left;
-      padding: 0 0.5em;
-    }
-  }
-
-  .main-menu {
-    li {
-      padding: 0 (@grid-gutter-width * .5);
-      float: left;
-      border-right: 1px solid mix(@gray-lighter, @brand-primary);
-
-      &.active {
-        background-color: darken(@brand-primary, 10);
-        a {
-          position: relative;
-          &:before {
-            display: inline-block;
-            position: absolute;
-            content: '';
-          }
-          text-decoration: underline;
-        }
-      }
-
-      &:last-child {
-        border-right: none;
-        margin-right: -15px;
-      }
-    }
+@media (max-width: 710px) {
+  .brand-name {
+    display: none;
   }
 }
 
-.navbar-container {
-  max-width: @page-toc-breakpoint + (@grid-gutter-width * -1);
-}
+@media (max-width: 590px) {
+  .navbar .search-field {
+    width: 100%;
+    padding: 0 (@grid-gutter-width * 0.5);
+    border-top: 1px solid mix(@brand-primary, @gray-lighter);
+  }
 
-.site-menu .main-menu {
-  display: none;
-}
-
-
-
-@media (max-width: @site-menu-breakpoint) {
-  .navbar .main-menu {
-    border-top: 1px solid mix(@gray-lighter, @brand-primary);
-    display: table;
-    width: ~"calc(100% + @{grid-gutter-width})";
-    margin-left: 0 - (@grid-gutter-width * 0.5);
-    margin-right: 0 - (@grid-gutter-width * 0.5);
-    background-color: mix(@gray, @brand-primary);
-
-    li {
-      height: 30px;
-      padding: 2px 5px;
-
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.6;
-      float: none;
-      width: 33%;
-
-      &:first-child {
-        padding-left: (@grid-gutter-width * 0.5);
-      }
-      &:last-child {
-        padding-right: (@grid-gutter-width * 0.5);
-      }
-    }
-
-    a {
-      height: auto;
-      line-height: 100%;
-    }
+  .page-wrapper,
+  .site-menu,
+  .search-results {
+    top: (2 * @navbar-height);
   }
 }
