@@ -151,8 +151,12 @@ function makeToggleBtn(ul) {
   var span = mkEl('span', {'class': 'submenu-toggle'});
 
   span.addEventListener('click', function () {
-    setSubmenuClasses(span);
     var li = span.parentNode;
+    if (li.classList.contains('open')) {
+      li.classList.remove('open');
+      return;
+    }
+    setSubmenuClasses(span);
 
     toArray(li.parentNode.childNodes).forEach(function (el) {
       if (!el.tagName) { return; }
