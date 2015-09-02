@@ -378,7 +378,6 @@ prismjs.languages.html = prismjs.languages.markup;
 
 
 queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
-  console.info('heading fond', heading.id, heading);
   if (!heading.id) { return; }
 
   var link = mkEl('a', {
@@ -452,7 +451,6 @@ queryAll('[data-bpmn-diagram]').forEach(function (el) {
 
 queryAll('[data-bpmn-symbol]').forEach(function (el) {
   var name = attr(el, 'data-bpmn-symbol');
-  console.info('bpmn symbol', name);
 });
 
 
