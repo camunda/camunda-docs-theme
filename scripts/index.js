@@ -368,11 +368,18 @@ prismjs.languages.xml = prismjs.languages.markup;
 prismjs.languages.html = prismjs.languages.markup;
 
 
+/********************************************************************\
+ * Content anchors                                                  *
+\********************************************************************/
+
+
 queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
+  console.info('heading fond', heading.id, heading);
   if (!heading.id) { return; }
+
   var link = mkEl('a', {
     href: '#' + heading.id,
-    className: 'content-anchor glyphicon glyphicon-link'
+    class: 'content-anchor glyphicon glyphicon-link'
   });
 
   heading.appendChild(link);

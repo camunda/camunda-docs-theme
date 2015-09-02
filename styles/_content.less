@@ -92,7 +92,7 @@ blockquote {
   h5,
   h6 {
     position: relative;
-    > .content-anchor {
+    a.content-anchor {
       transition: color 0.218s ease;
       position: absolute;
       right: 100%;
@@ -101,7 +101,7 @@ blockquote {
     }
 
     &:hover {
-      > .content-anchor {
+      a.content-anchor {
         color: @link-color;
       }
     }
@@ -121,7 +121,7 @@ blockquote {
       max-width: 100%;
       border: 1px solid @gray-light;
       padding: 3px;
-      display: block;
+      display: inline-block;
       margin: auto;
     }
   }
