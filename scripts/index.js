@@ -11,60 +11,13 @@ require('./classList');
 /********************************************************************\
  * DOM utilities                                                    *
 \********************************************************************/
-
-function toArray(thing) {
-  var arr = [];
-  if (!thing.length) { return arr; }
-  for (var i = 0; i < thing.length; i++) {
-    arr.push(thing[i]);
-  }
-  return arr;
-}
-
-function attr(node, name, value) {
-  if (value === null) {
-    node.removeAttribute(name);
-  }
-  else if (typeof value !== 'undefined') {
-    node.setAttribute(name, value);
-  }
-  return node.getAttribute(name);
-}
-
-function mkEl(name, attrs) {
-  var el = document.createElement(name);
-  if (attrs) {
-    Object.keys(attrs).forEach(function (name) {
-      attr(el, name, attrs[name]);
-    });
-  }
-  return el;
-}
-
-function offset(node) {
-  var parent = node;
-  var obj = {
-    top: parent.offsetTop,
-    left: parent.offsetLeft,
-  };
-
-  while ((parent = parent.offsetParent)) {
-    obj.top += parent.offsetTop;
-    obj.left += parent.offsetLeft;
-  }
-
-  return obj;
-}
-
-function query(selector, context) {
-  context = (context || document.body);
-  return context.querySelector(selector);
-}
-
-function queryAll(selector, context) {
-  context = (context || document.body);
-  return toArray(context.querySelectorAll(selector));
-}
+var utils = require('./utils');
+var toArray = utils.toArray;
+var attr = utils.attr;
+var mkEl = utils.mkEl;
+var offset = utils.offset;
+var query = utils.query;
+var queryAll = utils.queryAll;
 
 function openParentItem(childItem, className) {
   childItem.classList.add(className || 'open');
@@ -610,31 +563,7 @@ searchField.addEventListener('change', function(evt) {
  * Downloads                                                        *
 \********************************************************************/
 
-queryAll('[data-select]').forEach(function (select) {
-  var selector = attr(select, 'data-select');
-  select.classList.remove('nojs');
-
-  var links = queryAll('li', select);
-  links.forEach(function (li) {
-    li.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      var selected = li.className.replace(' active', '');
-
-      [].concat(links, queryAll(selector, select.parentNode)).forEach(function (el) {
-        var list = el.classList;
-        if (list.contains(selected)) {
-          if (!list.contains('active')) {
-            list.add('active');
-          }
-        }
-        else if (list.contains('active')) {
-          list.remove('active');
-        }
-      });
-    });
-  });
-});
-
+require('./ee-download');
 
 /********************************************************************\
  * Spying                                                           *

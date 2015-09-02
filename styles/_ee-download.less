@@ -1,117 +1,156 @@
 .cam-downloads {
-  background-color: @gray-lighter;
-  padding: (@grid-gutter-width * 0.5);
-  overflow: hidden;
   display: table;
   width: 100%;
 
+  ul.major {
+    width: 60px;
+  }
+
+  ul.patch {
+    width: 126px;
+  }
+
+  ul.server {
+    width: 116px;
+  }
+
+  div,
   ul,
   li {
-    margin: 0;
+    position: relative;
+    overflow: visible;
+  }
+
+  ul,
+  li {
     padding: 0;
+    margin: 0;
   }
 
   ul {
     list-style: none;
+    font-size: 14px;
+    line-height: 1.25;
+    a:after {
+      margin-top: 0;
+    }
   }
 
-  ul.application-servers {
-    width: 33%;
-    display: table-cell;
 
-    li {
+  ul {
+    z-index: 20;
+  }
+
+  div {
+    z-index: 10;
+  }
+
+  li {
+    cursor: pointer;
+
+    > a {
       padding: @padding-base-vertical @padding-base-horizontal;
-      transition: background-color 0.218s ease;
-      position: relative;
-      cursor: pointer;
-      &:hover a:after {
-        width: 100%;
-      }
+    }
+
+    &.active {
+      background-color: @brand-primary;
 
       &:after {
         content: '';
-        display: block;
-        margin-top: 0;
-        border-top: 0 solid transparent;
-        border-bottom: 0 solid transparent;
-        border-left: 0 solid @brand-primary;
         position: absolute;
+        display: block;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 8px solid @brand-primary;
+        margin-top: -8px;
         top: 50%;
         left: 100%;
-
-        transition: border 0.218s ease;
       }
 
-      &.active {
-        background-color: @brand-primary;
-
-        a {
-          color: @body-bg;
-        }
+      > a {
+        color: #fff;
 
         &:after {
-          left: 100%;
-          margin-top: -12px;
-          border-top: 12px solid transparent;
-          border-bottom: 12px solid transparent;
-          border-left: 12px solid @brand-primary;
+          width: 100%;
         }
       }
     }
   }
 
-  div.application-server {
-    padding: @padding-base-vertical (@grid-gutter-width * 0.5);
-    width: 67%;
-    display: none;
-    background-color: @body-bg;
+
+  > ul,
+  > div {
+    height: 100%;
+    display: table-cell;
     vertical-align: top;
+  }
 
-    &.active {
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    display: table;
+    vertical-align: top;
+    position: relative;
+    background-color: #EEEEEE;
+
+
+    > ul,
+    > div {
+      position: relative;
       display: table-cell;
+      height: 100%;
+      vertical-align: top;
     }
 
-    h3 {
-      margin-top: 0;
-      display: none;
+    .wrapper {
+      background-color: #D7D7D7;
     }
+  }
 
-    ul {
+  .selected-server {
+    background-color: #C4C4C4;
+    padding: @padding-base-vertical @padding-base-horizontal;
+    position: relative;
+
+    &:after {
+      padding: @padding-base-vertical @padding-base-horizontal;
+      content: 'Please, select a version and server';
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
       width: 100%;
-      display: table;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      line-height: 28px;
+      height: 28px;
+      margin-top: -14px;
+      font-size: 14px;
+      color: @gray;
+      font-style: italic;
+      z-index: 10;
     }
 
-    li {
-      display: table-cell;
-      // text-align: center;
-      &.active a:after {
-        width: 100%;
+    > div {
+      z-index: 9;
+      visibility: hidden;
+    }
+
+    &.accessible {
+      > div {
+        visibility: visible;
+      }
+      &:after {
+        display: none;
       }
     }
   }
 
-  .version {
-    display: none;
-    margin-top: (@grid-gutter-width * 0.5);
-    padding-top: (@grid-gutter-width * 0.5);
-    border-top: 1px dotted @gray-light;
-
-    &.active {
-      display: block;
-    }
-
-    h4 {
-      .font-bold;
-      span {
-        .font-light;
-      }
-    }
+  a.details {
+    font-size: 14px;
+    margin-bottom: (@grid-gutter-width * 0.5);
   }
-
-  div.help {
-    background-color: transparent;
-    color: @gray-light;
-    text-align: center;
-    vertical-align: middle;
+  .links {
+    text-align: right;
   }
 }
