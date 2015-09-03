@@ -80,8 +80,36 @@ function openParentItem(childItem, className) {
 
 
 
+/********************************************************************\
+ * Banner Support
+\********************************************************************/
 
+var bannerContainer = query('div[class=docs-banner]');
 
+if(!!bannerContainer) {
+  xhr({
+      uri: '/banners.html'
+    }, function (err, resp, body) {
+      
+      if(!err && resp.statusCode == 200) {
+
+        var offScreen = document.createElement('div');
+        offScreen.innerHTML = body;
+
+        var banners = queryAll('div[data-banner]', offScreen);
+
+        if(banners.length > 0) {
+          var randomIndex = Math.floor(Math.random() * banners.length);
+          bannerContainer.innerHTML = '';
+          bannerContainer.appendChild(banners[randomIndex]);
+        }
+      }
+
+      // always make banner container visible
+      bannerContainer.setAttribute('style', '');
+
+    });
+}
 
 
 /********************************************************************\
