@@ -1,0 +1,85 @@
+svg {
+  text,
+  tspan,
+  rect,
+  circle {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.implemented {
+  svg {
+    position: relative;
+    overflow: hidden;
+    [fill="#333333"] {
+      fill: @implemented-color;
+    }
+    [stroke="#333333"] {
+      stroke: @implemented-color;
+    }
+  }
+}
+
+.label-implemented {
+  background-color: @implemented-color;
+}
+
+.bpmn-symbols,
+.cmmn-symbols {
+  .row {
+    clear: both;
+    overflow: hidden;
+    > div {
+      overflow: hidden;
+    }
+  }
+}
+
+.bpmn-symbol-container {
+  float: left;
+  position: relative;
+  overflow: hidden;
+  padding-right: (@grid-gutter-width * 0.5);
+  margin-right: (@grid-gutter-width * 0.5);
+  margin-bottom: (@grid-gutter-width * 0.5);
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  > a {
+    position: absolute;
+    top: 0;
+    right: 4px;
+
+    &:after {
+      display: none;
+    }
+
+    &:before {
+      position: absolute;
+      display: block;
+      content: '';
+      background-color: fade(@gray-lighter, 75);
+      width: 64px;
+      height: 44px;
+      transform: translateX(-15px) translateY(-15px) rotateZ(45deg);
+      z-index: 0;
+      transition: background-color 0.218s ease;
+    }
+
+    &:hover:before {
+      background-color: fade(mix(@gray-lighter, @link-color), 75);
+    }
+  }
+}
+
+.bpmn-events,
+.table-cmmn-events {
+  td {
+    text-align: center;
+    &:first-of-type {
+      text-align: right;
+    }
+  }
+}

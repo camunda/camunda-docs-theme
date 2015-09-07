@@ -43,7 +43,7 @@ if(!!bannerContainer) {
   xhr({
       uri: '/banners.html'
     }, function (err, resp, body) {
-      
+
       if(!err && resp.statusCode == 200) {
 
         var offScreen = document.createElement('div');
@@ -422,23 +422,6 @@ queryAll('[data-bpmn-diagram]').forEach(function (el) {
     });
   });
 });
-
-
-
-
-
-
-
-
-queryAll('[data-bpmn-symbol]').forEach(function (el) {
-  var name = attr(el, 'data-bpmn-symbol');
-});
-
-
-
-
-
-
 
 
 /********************************************************************\

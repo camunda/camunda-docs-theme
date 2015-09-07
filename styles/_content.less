@@ -23,6 +23,18 @@ blockquote {
   border-left-color: mix(@brand-primary, @gray-lighter);
 }
 
+table {
+  thead,
+  tbody {
+    tr.collapse-bottom {
+      border-bottom: none;
+      > td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
 .page-content {
   // font-family: Georgia,Cambria,"Times New Roman",Times,serif;
   font-size: 17px;
