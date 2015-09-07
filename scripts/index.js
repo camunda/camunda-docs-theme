@@ -391,7 +391,14 @@ function fitBpmnViewport(el, viewer) {
   var vb = viewer.get('canvas').viewbox();
   var inner = vb.inner;
 
-  el.style.height = Math.round(inner.height * (el.clientWidth / inner.width)) + 'px';
+  if(el.offsetWidth < inner.width) {
+    // need to zoom out: calculate height
+    el.style.height = Math.round(inner.height * (el.clientWidth / inner.width)) + 'px';
+  }
+  else {
+    // set height to inner height
+    el.style.height = inner.height + 'px';
+  }
 
   var canvas = viewer.get('canvas');
   canvas.zoom('fit-viewport');
