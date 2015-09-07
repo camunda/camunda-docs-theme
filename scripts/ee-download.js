@@ -4,6 +4,21 @@
 /*global require: false, console: false*/
 var utils = require('./utils');
 
+var months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
 var attr = utils.attr;
 var query = utils.query;
 var mkEl = utils.mkEl;
@@ -49,6 +64,7 @@ function camDownloadsWidget(info, holder) {
   var infoDiv = query('.selected-server', holder);
   var standaloneDiv = query('.standalone', infoDiv);
 
+  var releaseTitle = query('.info h3', holder);
   var notesA = query('a.notes', holder);
   var dateSpan = query('span.date', holder);
   var zipA = query('a.zip', holder);
@@ -98,13 +114,16 @@ function camDownloadsWidget(info, holder) {
 
         var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{server}-{version}-ee', {
           version:  selectedVersion,
-          branch:   selectedBranch,
+          branch:   selectedVersion.indexOf('alpha') ? 'nightly' : selectedBranch,
           server:   selectedServer
         });
 
-        attr(notesA, 'href', releaseInfo.note);
+        releaseTitle.innerHTML = selectedVersion + ' for ' + info.servers[selectedServer];
 
-        dateSpan.innerHTML = releaseInfo.date;
+        var d = new Date(releaseInfo.date);
+        dateSpan.innerHTML = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+
+        attr(notesA, 'href', releaseInfo.note);
 
         attr(targzA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.tar.gz');
 
