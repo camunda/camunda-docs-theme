@@ -1,7 +1,7 @@
 'use strict';
 /*jshint browser: true*/
 
-/*global require: false, console: false*/
+/*global require: false*/
 var utils = require('./utils');
 
 var months = [
@@ -34,6 +34,7 @@ function mkListItems(target, texts, clickCb, that) {
     el.innerHTML = '<a>' + text + '</a>';
 
     el.addEventListener('click', function (evt) {
+      evt.preventDefault();
       items.forEach(function (e) {
         var cl = e.classList;
         if (e === el) {
@@ -46,7 +47,7 @@ function mkListItems(target, texts, clickCb, that) {
         }
       });
 
-      clickCb.call(that, evt, i);
+      clickCb.call(that, i, el);
     });
 
     target.appendChild(el);
@@ -76,73 +77,128 @@ function camDownloadsWidget(info, holder) {
     return (a > b ? -1 : (a < b ? 1 : 0));
   });
 
-  function mkPatchReleases(evt, b) {
-    patchList.innerHTML = '';
-    serverList.innerHTML = '';
-    infoDiv.classList.remove('accessible');
 
-    var selectedBranch = branches[b];
+  function getReleaseInfo(branch, version) {
+    return info.branches[branch].find(function (release) {
+      return release.number === version;
+    });
+  }
 
-    var patchReleases = info.branches[selectedBranch].map(function (release) {
+  function getBranchVersions(branch) {
+    return info.branches[branch].map(function (release) {
       return release.number;
     }).filter(function (item) { return !!item; });
+  }
+
+  function getServers(release) {
+    var servers = keys(info.servers);
+    if (release.excludeServers) {
+      servers = servers.filter(function (name) {
+        return release.excludeServers.indexOf(name) < 0;
+      });
+    }
+    return servers;
+  }
 
 
-    mkListItems(patchList, patchReleases, function mkServersList(evt, r) {
+
+  function mkServerClickHandler(servers, version, branch) {
+    return function (s) {
+      var selectedServer = servers[s];
+      var release = getReleaseInfo(branch, version);
+      infoDiv.classList.add('accessible');
+
+      var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{server}-{version}-ee', {
+        version:  version,
+        branch:   version.indexOf('alpha') ? 'nightly' : branch,
+        server:   selectedServer
+      });
+
+      releaseTitle.innerHTML = version + ' for ' + info.servers[selectedServer];
+
+      var d = new Date(release.date);
+      dateSpan.innerHTML = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+
+      attr(notesA, 'href', release.note);
+
+      attr(targzA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.tar.gz');
+
+      attr(zipA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.zip');
+
+      attr(warA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.war');
+
+      if (release.excludeFormats && release.excludeFormats.indexOf('war') > -1) {
+        standaloneDiv.style.display = 'none';
+      }
+      else {
+        standaloneDiv.style.display = 'block';
+      }
+    };
+  }
+
+  function mkVersionClickHandler(branchName) {
+    var patchReleases = getBranchVersions(branchName);
+
+    return function selectVersion(r) {
       serverList.innerHTML = '';
+
       infoDiv.classList.remove('accessible');
 
       var selectedVersion = patchReleases[r];
 
-      var releaseInfo = info.branches[selectedBranch].find(function (release) {
-        return release.number === selectedVersion;
-      });
+      var releaseInfo = getReleaseInfo(branchName, selectedVersion);
 
-      var releaseServers = keys(info.servers);
-      if (releaseInfo.excludeServers) {
-        releaseServers = releaseServers.filter(function (name) {
-          return releaseInfo.excludeServers.indexOf(name) < 0;
-        });
-      }
+      var releaseServers = getServers(releaseInfo);
 
-
-      mkListItems(serverList, releaseServers.map(function (name) {
+      return mkListItems(serverList, releaseServers.map(function (name) {
         return info.servers[name];
-      }), function (evt, s) {
-        var selectedServer = releaseServers[s];
-        infoDiv.classList.add('accessible');
-
-        var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{server}-{version}-ee', {
-          version:  selectedVersion,
-          branch:   selectedVersion.indexOf('alpha') ? 'nightly' : selectedBranch,
-          server:   selectedServer
-        });
-
-        releaseTitle.innerHTML = selectedVersion + ' for ' + info.servers[selectedServer];
-
-        var d = new Date(releaseInfo.date);
-        dateSpan.innerHTML = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-
-        attr(notesA, 'href', releaseInfo.note);
-
-        attr(targzA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.tar.gz');
-
-        attr(zipA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.zip');
-
-        attr(warA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.war');
-
-        if (releaseInfo.excludeFormats && releaseInfo.excludeFormats.indexOf('war') > -1) {
-          standaloneDiv.style.display = 'none';
-        }
-        else {
-          standaloneDiv.style.display = 'block';
-        }
-      });
-    });
+      }), mkServerClickHandler(releaseServers, selectedVersion, branchName));
+    };
   }
 
 
-  mkListItems(majorList, branches, mkPatchReleases);
+  function selectBranch(b) {
+    patchList.innerHTML = '';
+
+    serverList.innerHTML = '';
+
+    infoDiv.classList.remove('accessible');
+
+    var branchName = branches[b];
+
+    var patchReleases = getBranchVersions(branchName);
+
+    return mkListItems(patchList, patchReleases, mkVersionClickHandler(branchName));
+  }
+
+
+  var branchEls = mkListItems(majorList, branches, selectBranch);
+
+  if (info.selected) {
+    var b = branches.indexOf(info.selected.branch);
+
+    var versionEls = selectBranch(b);
+
+    branchEls[b].classList.add('active');
+
+
+    var patchReleases = getBranchVersions(branches[b]);
+
+    var v = patchReleases.indexOf(info.selected.version);
+
+    var serverEls = mkVersionClickHandler(branches[b])(v);
+
+    versionEls[v].classList.add('active');
+
+
+    var servers = getServers(patchReleases[v]);
+
+    var s = servers.indexOf(info.selected.server);
+
+    serverEls[s].classList.add('active');
+
+    mkServerClickHandler(servers, info.selected.version, info.selected.branch)(s);
+  }
 }
 
 var camDownloadsEl = query('.cam-downloads');
