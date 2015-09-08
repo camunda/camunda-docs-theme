@@ -176,23 +176,31 @@ siteMenuSubmenus.forEach(function (ul) {
 /********************************************************************\
  * Page scrolling and anchor links                                  *
 \********************************************************************/
-
+var debounced;
 function scrolling() {
   if (!toc) { return; }
-
-  var top = window.scrollY;
-
-  tocLinks.forEach(function (node) {
-    node.parentNode.classList.remove('open');
-  });
-
-  for (var i = 0; i < tocTargetPositions.length; i++) {
-    if (tocTargetPositions[i].top >= top) {
-      tocLinks[i].parentNode.classList.add('open');
-      openParentItem(tocLinks[i].parentNode);
-      i = tocTargetPositions.length;
-    }
+  if (debounced) {
+    clearTimeout(debounced);
   }
+  debounced = setTimeout(function () {
+    var top = window.scrollY;
+
+    tocLinks.forEach(function (node) {
+      node.parentNode.classList.remove('open');
+    });
+
+    tocTargetPositions = tocTargets.map(function (node) {
+      return offset(node);
+    });
+
+    for (var i = 0; i < tocTargetPositions.length; i++) {
+      if (tocTargetPositions[i].top >= top) {
+        tocLinks[i].parentNode.classList.add('open');
+        openParentItem(tocLinks[i].parentNode);
+        i = tocTargetPositions.length;
+      }
+    }
+  }, 100);
 }
 
 window.addEventListener('scroll', scrolling);
