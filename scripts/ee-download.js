@@ -101,7 +101,7 @@ function camDownloadsWidget(info, holder) {
   }
 
 
-
+  var dlBasePath = 'http://camunda.org/enterprise-release/camunda-bpm/';
   function mkServerClickHandler(servers, version, branch) {
     return function (s) {
       var selectedServer = servers[s];
@@ -121,11 +121,36 @@ function camDownloadsWidget(info, holder) {
 
       attr(notesA, 'href', release.note);
 
-      attr(targzA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.tar.gz');
+      attr(warA, 'href', dlBasePath + tmpl('{server}/{branch}/{version}/camunda-webapp-ee-{server}-standalone-{version}-ee', {
+        version:  version,
+        branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
+        server:   selectedServer
+      }) + '.war');
 
-      attr(zipA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.zip');
+      attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
 
-      attr(warA, 'href', 'http://camunda.org/enterprise-release/camunda-bpm/' + dl + '.war');
+      attr(zipA, 'href', dlBasePath + dl + '.zip');
+
+      if (selectedServer === 'ibm-was' || selectedServer === 'oracle-wls') {
+        dl = tmpl('{vendor}-{server}/{branch}/{version}/camunda-ee-{vendor}-{server}-{version}-ee', {
+          version:  version,
+          branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
+          vendor:   selectedServer.split('-')[0],
+          server:   selectedServer.split('-')[1]
+        });
+
+        attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
+
+        attr(zipA, 'href', dlBasePath + dl + '.zip');
+
+        attr(warA, 'href', dlBasePath + tmpl('{vendor}-{server}/{branch}/{version}/camunda-webapp-ee-{server}-standalone-{version}-ee', {
+          version:  version,
+          branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
+          vendor:   selectedServer.split('-')[0],
+          server:   selectedServer.split('-')[1]
+        }) + '.war');
+      }
+
 
       if (release.excludeFormats && release.excludeFormats.indexOf('war') > -1) {
         standaloneDiv.style.display = 'none';
