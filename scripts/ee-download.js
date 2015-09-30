@@ -116,8 +116,10 @@ function camDownloadsWidget(info, holder) {
 
       releaseTitle.innerHTML = version + ' for ' + info.servers[selectedServer];
 
-      var d = new Date(release.date);
-      dateSpan.innerHTML = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+      var parts = release.date.split('.').map(function (part) {
+        return parseInt(part, 10);
+      });
+      dateSpan.innerHTML = parts[2] + ' ' + months[parts[1]] + ' ' + parts[0];
 
       attr(notesA, 'href', release.note);
 
