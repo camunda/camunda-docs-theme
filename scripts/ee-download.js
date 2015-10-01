@@ -119,7 +119,7 @@ function camDownloadsWidget(info, holder) {
       var parts = release.date.split('.').map(function (part) {
         return parseInt(part, 10);
       });
-      dateSpan.innerHTML = parts[2] + ' ' + months[parts[1]] + ' ' + parts[0];
+      dateSpan.innerHTML = parts[2] + ' ' + months[parts[1] - 1] + ' ' + parts[0];
 
       attr(notesA, 'href', release.note);
 
