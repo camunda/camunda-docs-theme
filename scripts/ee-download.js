@@ -101,7 +101,7 @@ function camDownloadsWidget(info, holder) {
   }
 
 
-  var dlBasePath = 'http://camunda.org/enterprise-release/camunda-bpm/';
+  var dlBasePath = 'https://camunda.org/enterprise-release/camunda-bpm/';
   function mkServerClickHandler(servers, version, branch) {
     return function (s) {
       var selectedServer = servers[s];
