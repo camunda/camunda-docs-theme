@@ -114,7 +114,7 @@ function camDownloadsWidget(info, holder) {
         server:   selectedServer
       });
 
-      releaseTitle.innerHTML = version + ' for ' + info.servers[selectedServer];
+      releaseTitle.innerHTML = version + '-ee for ' + info.servers[selectedServer];
 
       var parts = release.date.split('.').map(function (part) {
         return parseInt(part, 10);
