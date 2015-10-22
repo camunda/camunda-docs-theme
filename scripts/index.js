@@ -212,7 +212,7 @@ function shiftWindow() {
 }
 
 if (location.hash) {
-  shiftWindow();
+  setTimeout(shiftWindow, 200);
 }
 window.addEventListener('hashchange', shiftWindow);
 
