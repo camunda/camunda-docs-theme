@@ -289,6 +289,7 @@ function showBigger(evt) {
 }
 
 queryAll('.page-content figure.image img').forEach(function (img) {
+  if (img.parentNode.parentNode.classList.contains('no-lightbox')) { return; }
   if (img.clientWidth < img.naturalWidth) {
     var figure = img.parentNode.parentNode;
     figure.classList.add('clickable');
