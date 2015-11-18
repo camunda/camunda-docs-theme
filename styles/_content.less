@@ -63,6 +63,9 @@ table {
 
   p {
     margin: (@padding-base-vertical * 2) 0;
+    &:empty {
+      display: none;
+    }
   }
 
   a {
@@ -79,7 +82,8 @@ table {
       border-bottom: 1px solid;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
       text-decoration: none;
       &:after {
         width: 100%;
@@ -495,51 +499,11 @@ code {
   font-size: 120%;
 }
 
-#camunda-logo-animated {
-  float: left;
-  max-width: 25%;
-  margin: 0 (@grid-gutter-width * 0.5) (@grid-gutter-width * 0.5) 0;
-
-  path {
-    transform: translate(0, 0);
-    fill: fade(@brand-primary, 0);
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0;
+.table-cmmn-events {
+  > tbody > tr > td {
+    vertical-align: middle;
   }
-
-  #in-path {
-    animation: dash-in 3s linear forwards;
-    stroke-dasharray: 921;
-    stroke-dashoffset: 921;
-  }
-
-  #out-path {
-    animation: dash-out 3s linear forwards;
-    stroke-dasharray: 241;
-    stroke-dashoffset: 241;
-  }
-}
-
-
-
-@keyframes dash-in {
-  75% {
-    stroke-dashoffset: 0;
-    fill: fade(@brand-primary, 0);
-  }
-  100% {
-    stroke-dashoffset: 0;
-    fill: @brand-primary;
-  }
-}
-
-@keyframes dash-out {
-  75% {
-    stroke-dashoffset: 0;
-    fill: fade(@brand-primary, 0);
-  }
-  100% {
-    stroke-dashoffset: 0;
-    fill: @brand-primary;
+  .glyphicon-ok {
+    color: @brand-warning;
   }
 }
