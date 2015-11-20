@@ -91,14 +91,18 @@ table {
     }
   }
 
+  figure span a,
+  a.content-anchor {
+    &:after {
+      display: none;
+    }
+  }
+
   a.content-anchor {
     font-size: 0.7em;
     color: inherit;
     text-decoration: none;
     color: mix(@link-color, @gray-lighter);
-    &:after {
-      display: none;
-    }
   }
 
   h1,
