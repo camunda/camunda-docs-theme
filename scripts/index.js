@@ -6,7 +6,12 @@ var xhr = require('xhr');
 require('./classList');
 
 
-
+function docLoaded(fn) {
+  document.addEventListener('load', fn);
+  document.addEventListener('DOMContentLoaded', fn);
+  document.addEventListener('ready', fn);
+  setTimeout(fn, 10);
+}
 
 /********************************************************************\
  * DOM utilities                                                    *
@@ -288,17 +293,19 @@ function showBigger(evt) {
   lightbox.classList.add('open');
 }
 
-queryAll('.page-content figure.image img').forEach(function (img) {
-  if (img.parentNode.parentNode.classList.contains('no-lightbox')) { return; }
-  if (img.clientWidth < img.naturalWidth) {
-    var figure = img.parentNode.parentNode;
-    figure.classList.add('clickable');
-    figure.addEventListener('click', showBigger);
-  }
-});
 
-
-
+function attachLightbox () {
+  queryAll('.page-content figure.image img:not(.js-processed)').forEach(function (img) {
+    img.classList.add('js-processed');
+    if (img.parentNode.parentNode.classList.contains('no-lightbox')) { return; }
+    if (img.clientWidth < img.naturalWidth) {
+      var figure = img.parentNode.parentNode;
+      figure.classList.add('clickable');
+      figure.addEventListener('click', showBigger);
+    }
+  });
+}
+docLoaded(attachLightbox);
 
 
 
@@ -423,28 +430,32 @@ function fitBpmnViewport(el, viewer) {
   }, 10);
 }
 
-queryAll('[data-bpmn-diagram]').forEach(function (el) {
-  var src = attr(el, 'data-bpmn-diagram');
+function attachDiagrams () {
+  queryAll('[data-bpmn-diagram]:not(.js-processed)').forEach(function (el) {
+    var src = attr(el, 'data-bpmn-diagram');
+    el.classList.add('js-processed');
 
-  var viewer = new BPMNViewer({
-    container: el,
-    width: '100%',
-    height: '100%',
-    overlays: {
-      deferUpdate: false
-    }
-  });
+    var viewer = new BPMNViewer({
+      container: el,
+      width: '100%',
+      height: '100%',
+      overlays: {
+        deferUpdate: false
+      }
+    });
 
-  xhr({
-    uri: src + '.bpmn',
-  }, function (err, resp, body) {
-    if (err) { throw err; }
-    viewer.importXML(body, function(err) {
+    xhr({
+      uri: src + '.bpmn',
+    }, function (err, resp, body) {
       if (err) { throw err; }
-      fitBpmnViewport(el, viewer);
+      viewer.importXML(body, function(err) {
+        if (err) { throw err; }
+        fitBpmnViewport(el, viewer);
+      });
     });
   });
-});
+}
+docLoaded(attachDiagrams);
 
 
 /********************************************************************\
