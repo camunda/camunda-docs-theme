@@ -7,10 +7,14 @@ require('./classList');
 
 
 function docLoaded(fn) {
-  document.addEventListener('load', fn);
-  document.addEventListener('DOMContentLoaded', fn);
-  document.addEventListener('ready', fn);
-  setTimeout(fn, 10);
+  var p = document.addEventListener ?
+          function () { document.addEventListener('DOMContentLoaded', fn); } :
+          function () { window.attachEvent('onload', fn); }
+  ;
+
+  var s = document.readyState;
+  if (s === 'interactive' || s === 'complete') { fn(); }
+  else { p(); }
 }
 
 /********************************************************************\
