@@ -126,7 +126,7 @@ function camDownloadsWidget(info, holder) {
       attr(warA, 'href', dlBasePath + tmpl('{server}/{branch}/{version}/camunda-webapp-ee-{server}-standalone-{version}-ee', {
         version:  version,
         branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
-        server:   selectedServer
+        server:   selectedServer === 'wildfly' ? 'jboss' : selectedServer
       }) + '.war');
 
       attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
