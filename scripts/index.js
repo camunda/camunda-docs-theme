@@ -6,16 +6,17 @@ var xhr = require('xhr');
 require('./classList');
 
 
-function docLoaded(fn) {
-  var p = document.addEventListener ?
-          function () { document.addEventListener('DOMContentLoaded', fn); } :
-          function () { window.attachEvent('onload', fn); }
-  ;
+var init = [];
+function docLoaded(fn) { init.push(fn); }
+document.addEventListener('readystatechange', function () {
+  if (document.readyState === 'complete') {
+    var fn;
+    /*jshint boss: true*/
+    while (fn = init.pop()) { fn(); }
+    /*jshint boss: false*/
+  }
+});
 
-  var s = document.readyState;
-  if (s === 'interactive' || s === 'complete') { fn(); }
-  else { p(); }
-}
 
 /********************************************************************\
  * DOM utilities                                                    *
