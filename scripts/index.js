@@ -12,7 +12,7 @@ document.addEventListener('readystatechange', function () {
   if (document.readyState === 'complete') {
     var fn;
     /*jshint boss: true*/
-    while (fn = init.pop()) { fn(); }
+    while (fn = init.shift()) { fn(); }
     /*jshint boss: false*/
   }
 });
