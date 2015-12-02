@@ -83,6 +83,8 @@ body {
   width: @page-toc-width;
   top: 106px;
   left: @site-menu-width + (@grid-gutter-width * 2) + @page-content-max-width;
+  overflow: auto;
+  max-height: ~"calc(100% - (106px + (@{footer-height} + @{grid-gutter-width})));"
 }
 
 .page-footer {
