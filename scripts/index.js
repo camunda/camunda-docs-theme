@@ -373,18 +373,19 @@ prismjs.languages.html = prismjs.languages.markup;
  * Content anchors                                                  *
 \********************************************************************/
 
+function addAnchors() {
+  queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
+    if (!heading.id) { return; }
 
-queryAll('h1, h2, h3, h4, h5, h6', query('.page-content')).forEach(function (heading) {
-  if (!heading.id) { return; }
+    var link = mkEl('a', {
+      href: '#' + heading.id,
+      class: 'content-anchor glyphicon glyphicon-link'
+    });
 
-  var link = mkEl('a', {
-    href: '#' + heading.id,
-    class: 'content-anchor glyphicon glyphicon-link'
+    heading.appendChild(link);
   });
-
-  heading.appendChild(link);
-});
-
+}
+docLoaded(addAnchors);
 
 
 
@@ -553,7 +554,7 @@ function performSearch(uri) {
   });
 }
 
-searchField.addEventListener('change', function(evt) {
+function searchEvent(evt) {
   evt.preventDefault();
 
   var search = searchField.value.trim();
@@ -564,8 +565,10 @@ searchField.addEventListener('change', function(evt) {
   bodyClasses.add('search-open');
 
   performSearch(searchUri + search);
-});
+}
 
+searchField.addEventListener('change', searchEvent);
+searchField.value = '';
 
 
 
