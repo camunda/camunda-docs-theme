@@ -472,7 +472,7 @@ var gSearchApiKey = 'AIzaSyCMGfdDaSfjqv5zYoS0mTJnOT3e9MURWkU';
 var gSearchCtx = '007121298374582869478:yaec0vxmc7e';
 var bodyClasses = document.body.classList;
 var searchUri = 'https://www.googleapis.com/customsearch/v1?key=' + gSearchApiKey + '&cx=' + gSearchCtx + '&q=';
-var searchField = query('input[type=search]');
+var searchField = query('.search-input');
 var searchResults = query('.search-results');
 var searchUnderlay = query('.search-underlay');
 var searchCloseBtn = query('.search-close', searchResults);
@@ -558,6 +558,13 @@ function searchEvent(evt) {
   evt.preventDefault();
 
   var search = searchField.value.trim();
+
+  // IE9 users are redirected
+  if (document.all && !window.atob) {
+    window.open('https://www.google.com/search?q=site%3Ahttp%3A%2F%2Fdocs.camunda.org%20' + search, 'GoogleSearch');
+    return;
+  }
+
   if(!search.length) {
     bodyClasses.remove('search-open');
     return;
