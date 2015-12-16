@@ -39,6 +39,18 @@ Updating the theme to the latest version:
 git subtree pull -P themes/camunda git@github.com:camunda/camunda-docs-theme.git dist --squash
 ```
 
+### Theme development with Virtualbox
+
+This would be the command to execute in order to make the local development site
+of `camunda-docs-manual` (see `--baseUrl` option) available in a virtualbox (typically for IE).
+Livereload should be deactivate (see `--disableLiveReload`) if you want to develop for IE9.
+
+```sh
+hugo --bind="0.0.0.0" --baseUrl="http://10.0.2.2:1313/manual/develop/" -w --disableLiveReload=true server
+```
+The development site is then available on `http://10.0.2.2:1313/manual/develop/``in your virtualbox
+guest OS.
+
 ## Licence
 
 [MIT](LICENSE)
