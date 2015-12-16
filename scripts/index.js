@@ -5,19 +5,6 @@
 var xhr = require('xhr');
 require('./classList');
 
-
-var init = [];
-function docLoaded(fn) { init.push(fn); }
-document.addEventListener('readystatechange', function () {
-  if (document.readyState === 'complete') {
-    var fn;
-    /*jshint boss: true*/
-    while (fn = init.shift()) { fn(); }
-    /*jshint boss: false*/
-  }
-});
-
-
 /********************************************************************\
  * DOM utilities                                                    *
 \********************************************************************/
@@ -28,6 +15,7 @@ var mkEl = utils.mkEl;
 var offset = utils.offset;
 var query = utils.query;
 var queryAll = utils.queryAll;
+var docLoaded = utils.docLoaded;
 
 function openParentItem(childItem, className) {
   childItem.classList.add(className || 'open');
