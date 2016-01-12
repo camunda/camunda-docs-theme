@@ -354,6 +354,8 @@ if (versionSelect) {
 \********************************************************************/
 
 var prismjs = require('prismjs');
+require('prismjs/plugins/line-highlight/prism-line-highlight');
+require('prismjs/plugins/line-numbers/prism-line-numbers');
 require('prismjs/components/prism-bash');
 require('prismjs/components/prism-css');
 require('prismjs/components/prism-css-extras');
