@@ -1,24 +1,3 @@
-body {
-  .font-regular;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  .font-regular;
-}
-
-h3 {
-  text-transform: uppercase;
-}
-
-dt,
-label,
-legend {
-  .font-regular;
-}
-
 blockquote {
   border-left-color: mix(@brand-primary, @gray-lighter);
 }
@@ -36,58 +15,20 @@ table {
 }
 
 .page-content {
-  // font-family: Georgia,Cambria,"Times New Roman",Times,serif;
   font-size: 17px;
   line-height: 28px;
-
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    color: #000;
-  }
 
   h1 {
     margin-top: @padding-base-vertical * 8;
   }
-  h2 {
-    margin-top: @padding-base-vertical * 7;
-  }
-  h3 {
-    margin-top: @padding-base-vertical * 6;
-  }
-  h4 {
-    margin-top: @padding-base-vertical * 5;
+  .content-text h1 {
+    text-transform: none;
   }
 
   p {
     margin: (@padding-base-vertical * 2) 0;
     &:empty {
       display: none;
-    }
-  }
-
-  a {
-    display: inline-block;
-    text-decoration: none;
-
-    &:after {
-      margin-top: -3px;
-      display: block;
-      content: '';
-      height: 1px;
-      width: 0%;
-      transition: width 0.218s ease;
-      border-bottom: 1px solid;
-    }
-
-    &:hover,
-    &.active {
-      text-decoration: none;
-      &:after {
-        width: 100%;
-      }
     }
   }
 
@@ -229,9 +170,6 @@ table {
   td {
     white-space: normal;
   }
-  th {
-    .font-bold;
-  }
 
   .dl-horizontal {
     dt {
@@ -316,15 +254,13 @@ h1.page-title {
 
 dt {
   font-size: 110%;
-  // font-size: 16px;
 }
 dd {
   margin: 0.5em 0 1em 2em;
 }
 
 
-// pre[class^="language-"],
-// pre[class*="language-"],
+
 .gs-download-step-panel,
 .note,
 pre.console,
@@ -339,18 +275,6 @@ pre.console {
   padding: (@grid-gutter-width * 0.5);// 0;
   border: 1px solid black;
   border-radius: 3px;
-  // .line {
-  //   min-height: 1.2em;
-  //   display: block;
-  //   padding: 0.4em (@grid-gutter-width * 0.5);
-  //   &:nth-child(odd) {
-  //     background-color: lighten(@gray-dark, 3);
-  //   }
-  //   &:last-child {
-  //     display: none;
-  //     margin-bottom: 0;
-  //   }
-  // }
 }
 
 [data-bpmn-diagram] .bjs-powered-by {
