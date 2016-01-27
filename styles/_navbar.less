@@ -1,24 +1,21 @@
+@navbar-computed-height: @navbar-height - 5px;
 .navbar-fixed-top {
   padding: 0;
-  background-color: @brand-primary;
-  color: #fff;
-
-  a {
-    color: #fff;
-  }
+  background-color: @body-bg;
+  border-bottom: 5px solid @brand-primary;
 }
 
 
 .navbar-container {
   width: 100%;
-  height: @navbar-height;
+  height: @navbar-computed-height;
   max-width: @page-toc-breakpoint;
 
   > div,
   > ul {
     padding: 0;
-    height: @navbar-height;
-    line-height: @navbar-height;
+    height: @navbar-computed-height;
+    line-height: @navbar-computed-height;
   }
 
   .navbar-header,
@@ -51,27 +48,27 @@
   .navbar-text {
     margin: 0;
     vertical-align: middle;
-    height: @navbar-height;
+    max-height: @navbar-computed-height;
 
     a,
     a span {
-      height: @navbar-height;
+      height: @navbar-computed-height;
       vertical-align: middle;
+      text-decoration: none;
     }
 
     a {
       display: inline-block;
-      height: @navbar-height;
-      line-height: @navbar-height;
-      text-decoration: none;
+      height: @navbar-computed-height;
+      line-height: @navbar-computed-height;
       padding-right: (@grid-gutter-width * 0.25);
-      &:hover {
-        text-decoration: none;
-      }
     }
 
     &:hover {
-      background-color: darken(@brand-primary, 10%);
+      background-color: @gray-lighter;
+      .brand-name {
+        text-decoration: underline;
+      }
     }
 
     button {
@@ -88,17 +85,17 @@
   .main-menu {
     a {
       display: inline-block;
-      padding: 0 (@grid-gutter-width * 0.25);
+      padding: 0 @padding-base-horizontal;
+      @media (max-width: @site-menu-breakpoint) {
+        padding: 0 (@padding-base-horizontal * 0.5);
+      }
     }
 
     li {
-      border-left: 1px solid @body-bg;
-
       &:hover,
       &.active {
         a {
-          text-decoration: underline;
-          background-color: darken(@brand-primary, 10%);
+          background-color: @gray-lighter;
         }
       }
     }
@@ -124,7 +121,7 @@
     display: block;
     height: 2px;
     margin-bottom: 3px;
-    background: #fff;
+    background: @link-color;
     transition: background-color 0.218s linear;
 
     &:first-child {
@@ -132,10 +129,8 @@
     }
   }
   &:hover {
-    border: 1px solid @gray-lighter;
-    background-color: #fff;
     > span {
-      background-color: @brand-primary;
+      background-color: @link-hover-color;
     }
   }
 
