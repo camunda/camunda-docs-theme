@@ -1,4 +1,3 @@
-@navbar-computed-height: @navbar-height - 5px;
 .navbar-fixed-top {
   padding: 0;
   background-color: @body-bg;
@@ -8,19 +7,43 @@
 
 .navbar-container {
   width: 100%;
-  height: @navbar-computed-height;
+  height: @header-computed-height;
+  color: @navbar-default-color;
+  background-color: @navbar-default-bg;
+  font-size: @navbar-font-size;
+
   max-width: @page-toc-breakpoint;
+  @media (min-width: (@site-menu-breakpoint + 1px)) and (max-width: 1065px) {
+    padding-right: (@grid-gutter-width * 1.5);
+  }
+  @media (min-width: 1065px) and (max-width: @page-toc-breakpoint) {
+    max-width: 1005px;
+  }
+
+  a {
+    color: @navbar-default-link-color;
+    &:hover,
+    &:focus {
+      color: @navbar-default-link-hover-color;
+    }
+  }
 
   > div,
   > ul {
     padding: 0;
-    height: @navbar-computed-height;
-    line-height: @navbar-computed-height;
+    height: @header-computed-height;
+    line-height: @header-computed-height;
   }
 
-  .navbar-header,
-  .main-menu {
+  .navbar-header {
     float: left;
+  }
+
+  .push-right {
+    float: right;
+    > * {
+      float: left;
+    }
   }
 
   .brand-name {
@@ -29,7 +52,6 @@
   }
 
   .search-field {
-    float: right;
     padding-right: (@grid-gutter-width * 0.5);
   }
 
@@ -48,19 +70,20 @@
   .navbar-text {
     margin: 0;
     vertical-align: middle;
-    max-height: @navbar-computed-height;
+    height: @header-computed-height;
+    padding-left: 2.5px;
 
     a,
     a span {
-      height: @navbar-computed-height;
+      height: @header-computed-height;
       vertical-align: middle;
       text-decoration: none;
     }
 
     a {
       display: inline-block;
-      height: @navbar-computed-height;
-      line-height: @navbar-computed-height;
+      height: @header-computed-height;
+      line-height: @header-computed-height;
       padding-left: (@grid-gutter-width * 0.25);
       padding-right: (@grid-gutter-width * 0.25);
     }
@@ -84,11 +107,13 @@
   }
 
   .main-menu {
+    overflow: hidden;
+    padding: 0;
     a {
       display: inline-block;
       padding: 0 @padding-base-horizontal;
       @media (max-width: @site-menu-breakpoint) {
-        padding: 0 (@padding-base-horizontal * 0.5);
+        padding: 0 6px;
       }
     }
 
@@ -96,7 +121,7 @@
       &:hover,
       &.active {
         a {
-          background-color: @gray-lighter;
+          background-color: @navbar-default-link-active-bg;
         }
       }
     }
@@ -106,56 +131,64 @@
 
 
 .site-menu-toggle {
+  .hamburger-button();
+  margin-right: 10px;//(@grid-gutter-width * 0.5);
   display: none;
-  background: none;
+  height: @header-computed-height;
 
-  width: 26px;
-  padding: 2px 5px;
-  margin-left: 10px;
-
-  border: 1px solid transparent;
-
-  transition: border-color 0.218s linear,
-              background-color 0.218s linear;
-
-  > span {
-    display: block;
-    height: 2px;
-    margin-bottom: 3px;
-    background: @link-color;
-    transition: background-color 0.218s linear;
-
-    &:first-child {
-      margin-top: 3px;
-    }
-  }
-  &:hover {
-    > span {
-      background-color: @link-hover-color;
+  @media (max-width: 710px) {
+    &.show-small {
+      display: inline-block;
+      float: right;
     }
   }
 
-  @media (max-width: @site-menu-breakpoint) {
-    display: inline-block;
+  @media (min-width: (710 + 1px)) and (max-width: @site-menu-breakpoint) {
+    &.show-medium {
+      display: inline-block;
+    }
   }
+}
+
+body.site-menu-open .site-menu-toggle {
+  .hamburger-button-open();
 }
 
 @media (max-width: 710px) {
   .brand-name {
     display: none;
   }
-}
 
-@media (max-width: 660px) {
-  .navbar .search-field {
-    width: 100%;
-    padding: 0 (@grid-gutter-width * 0.5);
-    border-top: 1px solid mix(@brand-primary, @gray-lighter);
+  .navbar {
+    .search-field {
+      width: 100%;
+      padding: 0 (@grid-gutter-width * 0.5);
+      border-top: 1px solid @header-border-bottom-color;
+    }
+    .push-right {
+      float: none;
+      width: 100%;
+    }
+    .main-menu {
+      float: right;
+      padding: 0 (@grid-gutter-width * 0.5);
+
+      li {
+        display: inline-block;
+        &:first-of-type {
+          margin-left: 0 - @padding-base-horizontal;
+        }
+        &:last-of-type {
+          margin-right: 0 - @padding-base-horizontal;
+        }
+      }
+    }
   }
+
 
   .page-wrapper,
   .site-menu,
   .search-results {
-    top: (2 * @navbar-height);
+    top: (2 * @navbar-height) - (@header-border-bottom-width - 1px);
   }
 }

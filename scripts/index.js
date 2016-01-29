@@ -109,10 +109,12 @@ if (currentLink) {
  * Open menu section                                                *
 \********************************************************************/
 
-var siteMenuToggle = query('.site-menu-toggle');
+var siteMenuToggle = queryAll('.site-menu-toggle');
 if (siteMenuToggle) {
-  siteMenuToggle.addEventListener('click', function () {
-    document.body.classList.toggle('site-menu-open');
+  siteMenuToggle.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.body.classList.toggle('site-menu-open');
+    });
   });
 }
 

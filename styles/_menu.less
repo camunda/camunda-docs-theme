@@ -4,6 +4,7 @@
     line-height: 32px;
     padding: 0 (@grid-gutter-width * 0.5) 7px (@grid-gutter-width * 0.5);
     margin: 0 (@grid-gutter-width * 0.5) 16px (@grid-gutter-width * 0.5);
+    font-size: smaller;
     &.versioned {
       background-color: #fff;
     }
@@ -69,10 +70,11 @@
   .site-menu-items {
     overflow: auto;
     height: ~"calc(100% - 49px)";
+    width: ~"calc(100% - @{navbar-padding-horizontal})";
     margin: 0 0 0 @navbar-padding-horizontal;
 
     > li {
-      background-color: @gray-lighter;
+      background-color: fade(@body-bg, 95%);
       margin-bottom: @padding-base-vertical;
       display: block;
       padding-left: 0;
@@ -233,7 +235,7 @@
 
 @media (max-width: @site-menu-breakpoint) {
   .site-menu {
-    background-color: fade(@gray-lighter, 95);
+    background-color: fade(@body-bg, 95);
   }
 }
 
