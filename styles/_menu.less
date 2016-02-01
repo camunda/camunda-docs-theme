@@ -1,9 +1,25 @@
 .site-menu {
+  > .version,
+  > .site-menu-items {
+    z-index: 10;
+    position: relative;
+    &:after {
+      display: block;
+      position: absolute;
+      z-index: 9;
+      content: '';
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background-color: @gray-lighter;
+    }
+  }
+
   > .version {
     height: 32px;
     line-height: 32px;
     padding: 0 (@grid-gutter-width * 0.5) 7px (@grid-gutter-width * 0.5);
-    margin: 0 (@grid-gutter-width * 0.5) 16px (@grid-gutter-width * 0.5);
     font-size: smaller;
     &.versioned {
       background-color: #fff;
@@ -12,6 +28,7 @@
     > span {
       width: 50%;
       float: left;
+      background-color: @gray-lighter;
     }
 
     .name {
@@ -69,12 +86,11 @@
 
   .site-menu-items {
     overflow: auto;
-    height: ~"calc(100% - 49px)";
+    height: ~"calc(100% - 32px)";
     width: ~"calc(100% - @{navbar-padding-horizontal})";
     margin: 0 0 0 @navbar-padding-horizontal;
 
     > li {
-      background-color: fade(@body-bg, 95%);
       margin-bottom: @padding-base-vertical;
       display: block;
       padding-left: 0;
@@ -83,6 +99,7 @@
       border-color: transparent;
       border-width: 0 2px;
       position: relative;
+      z-index: 15;
 
       > ul {
         padding-left: (@padding-base-horizontal * 2);
@@ -114,7 +131,8 @@
         &:before,
         &:after {
           right: -2px;
-          top: 50%;
+          // top: 50%;
+          top: 21px;
           border: solid transparent;
           content: ' ';
           height: 0;
