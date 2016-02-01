@@ -159,9 +159,7 @@ body.site-menu-open .site-menu-toggle {
 
   .navbar {
     .search-field {
-      width: 100%;
-      padding: 0 (@grid-gutter-width * 0.5);
-      border-top: 1px solid @header-border-bottom-color;
+      display: none;
     }
     .push-right {
       float: none;
@@ -181,12 +179,5 @@ body.site-menu-open .site-menu-toggle {
         }
       }
     }
-  }
-
-
-  .page-wrapper,
-  .site-menu,
-  .search-results {
-    top: (2 * @navbar-height) - (@header-border-bottom-width - 1px);
   }
 }
