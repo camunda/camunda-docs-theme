@@ -1,10 +1,17 @@
 .page-toc {
+  font-size: 14px;
+  line-height: 20px;
+
   > h3 {
     margin-top: 0;
     text-transform: uppercase;
     font-weight: lighter;
     font-size: 14px;
     margin-bottom: 14px;
+  }
+
+  a {
+    .navbar-a();
   }
 
   ul,
@@ -27,31 +34,90 @@
   }
 
   li {
-    padding-left: .5em;
-    border-left: 1px solid transparent;
-    margin-left: .5em;
-    margin-bottom: 0.3em;
-    &:last-child {
+    padding: 0;
+    margin-bottom: (@padding-base-vertical * 1);
+
+    position: relative;
+    z-index: 10;
+    > a {
+      display: block;
+
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
+        width: 3px;
+        border: none;
+        z-index: 9;
+      }
+      &:before {
+        right: auto;
+        left: 0;
+      }
+      &:after {
+        right: 0;
+        left: auto;
+      }
+
+      &:hover,
+      &:focus {
+        &:before,
+        &:after {
+          background-color: @navbar-default-link-hover-bg;
+        }
+      }
+    }
+
+    &:last-of-type {
       margin-bottom: 0;
     }
+
     > ul {
       max-height: 0;
     }
+
+    &.active-trail,
     &.open {
-      border-left: 1px solid @brand-primary;
       > ul {
-        max-height: 2000px;
+        max-height: 100vh;
+      }
+    }
+
+    &.open {
+      > a,
+      > a:hover,
+      > a:focus {
+        &:before,
+        &:after {
+          background-color: @navbar-default-link-active-bg;
+        }
       }
     }
   }
 
   nav {
-    padding-left: @grid-gutter-width * .5;
-    border-left: 1px dotted @gray-light;
-    > ul {
-      margin-left: 0;
-      > li {
-        margin-left: 0;
+    li {
+      a {
+        padding-left: (@padding-base-horizontal * 1);
+      }
+      li {
+        a {
+          padding-left: (@padding-base-horizontal * 2);
+        }
+        li {
+          a {
+            padding-left: (@padding-base-horizontal * 3);
+          }
+          li {
+            a {
+              padding-left: (@padding-base-horizontal * 4);
+            }
+          }
+        }
       }
     }
   }

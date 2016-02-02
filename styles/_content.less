@@ -24,9 +24,6 @@ table {
   h1 {
     margin-top: @padding-base-vertical * 8;
   }
-  .content-text h1 {
-    text-transform: none;
-  }
 
   p {
     margin: (@padding-base-vertical * 2) 0;
@@ -65,6 +62,8 @@ table {
       @media (max-width: @site-menu-breakpoint) {
         right: auto;
         margin-left: 5px;
+        position: static;
+        font-size: 60%;
       }
     }
 
@@ -251,9 +250,8 @@ table {
 }
 
 h1.page-title {
-  color: @gray;
   padding-bottom: 10px;
-  border-bottom: 1px solid @gray-light;
+  border-bottom: 1px solid currentColor;
   margin-bottom: @grid-gutter-width * .5;
   margin-top: @grid-gutter-width * 1.5;
 }
@@ -426,7 +424,7 @@ pre.console {
 }
 
 code {
-  color: @gray-dark;
+  padding: 0;
 }
 
 .docs-intro {

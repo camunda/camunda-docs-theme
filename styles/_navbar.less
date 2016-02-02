@@ -46,7 +46,8 @@
     }
   }
 
-  .brand-name {
+  .brand-name,
+  .site-name {
     font-size: 20px;
     position: relative;
     bottom: 2px;
@@ -54,6 +55,7 @@
 
   .search-field {
     padding-right: (@grid-gutter-width * 0.5);
+    width: 203px;
   }
 
   ul {
@@ -63,14 +65,7 @@
 
 
   li {
-    margin: 0;
-    padding: 0;
-    float: left;
-    &.divider {
-      border-left: 1px solid darken(@gray-lighter, 10%);
-      display: block;
-      height: @header-computed-height;
-    }
+    .navbar-li();
   }
 
   .navbar-text {
@@ -94,10 +89,6 @@
       padding-right: (@grid-gutter-width * 0.25);
     }
 
-    &:hover {
-      background-color: @gray-lighter;
-    }
-
     button {
       vertical-align: middle;
     }
@@ -112,22 +103,27 @@
   .main-menu {
     overflow: hidden;
     padding: 0;
-    a {
-      display: inline-block;
-      padding: 0 @padding-base-horizontal;
-      @media (max-width: @site-menu-breakpoint) {
-        padding: 0 6px;
-      }
+    > li {
+      .navbar-li();
     }
 
-    li {
-      &:hover,
-      &.active {
-        a {
-          background-color: @navbar-default-link-active-bg;
-        }
-      }
-    }
+    // a {
+    //   display: inline-block;
+    //   padding: 0 @padding-base-horizontal;
+
+    //   @media (max-width: @site-menu-breakpoint) {
+    //     padding: 0 6px;
+    //   }
+    // }
+
+    // li {
+    //   &:hover a {
+    //     background-color: @navbar-default-link-hover-bg;
+    //   }
+    //   &.active a {
+    //     background-color: @navbar-default-link-active-bg;
+    //   }
+    // }
   }
 }
 
@@ -164,9 +160,12 @@ body.site-menu-open .site-menu-toggle {
 }
 
 @media (max-width: 710px) {
-
+  .navbar-container {
+    padding-right: 0px;
+  }
   .navbar {
-    .search-field {
+    .search-field,
+    .brand-name {
       display: none;
     }
     .push-right {
@@ -187,5 +186,22 @@ body.site-menu-open .site-menu-toggle {
         }
       }
     }
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    .search-field {
+      display: none;
+    }
+  }
+  .navbar-container {
+    padding-right: 56px;
+  }
+}
+
+@media (max-width: @site-menu-breakpoint) {
+  .navbar-container {
+    padding-right: 0;
   }
 }

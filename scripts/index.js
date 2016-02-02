@@ -185,8 +185,10 @@ function scrolling() {
   debounced = setTimeout(function () {
     var top = window.scrollY;
 
-    tocLinks.forEach(function (node) {
-      node.parentNode.classList.remove('open');
+    queryAll('.active-trail, .open', toc).forEach(function (node) {
+      var cl = node.classList;
+      cl.remove('active-trail');
+      cl.remove('open');
     });
 
     tocTargetPositions = tocTargets.map(function (node) {
@@ -200,6 +202,11 @@ function scrolling() {
         i = tocTargetPositions.length;
       }
     }
+
+    queryAll('.open', toc).slice(0, -1).forEach(function (el) {
+      el.classList.remove('open');
+      el.classList.add('active-trail');
+    });
   }, 100);
 }
 
