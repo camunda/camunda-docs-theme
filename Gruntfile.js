@@ -108,7 +108,10 @@ module.exports = function (grunt) {
         tasks: ['copy:layouts']
       },
       styles: {
-        files: ['styles/**/*.less'],
+        files: [
+          'node_modules/camunda-commons-ui/{resources/less,lib/widgets}/**/*.less',
+          'styles/**/*.less'
+        ],
         tasks: ['less:styles']
       },
       scripts: {
