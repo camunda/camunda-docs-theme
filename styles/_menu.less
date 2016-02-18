@@ -14,7 +14,7 @@
     }
 
     .name {
-      .font-bold;
+      font-weight: 700;
       text-align: right;
       padding-right: 0.3em;
       &:after {
@@ -224,5 +224,11 @@
 @media (max-width: @site-menu-breakpoint) {
   .site-menu {
     background-color: fade(@body-bg, 95);
+  }
+}
+
+@media (min-width: (@site-menu-breakpoint + 1)) {
+  .site-menu-toggle {
+    display: none;
   }
 }
