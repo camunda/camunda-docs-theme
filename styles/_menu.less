@@ -1,5 +1,5 @@
 .site-menu {
-  border-right: 1px solid @gray-lighter;
+  border-right: 1px solid mix(@gray-light, @gray-lighter);
   background-color: @body-bg;
 
   > .version {
@@ -72,30 +72,33 @@
 
     li {
       .menu-li();
+      > a {
+        margin-left: 2px;
+        border-left: 3px solid transparent;
+        color: @text-color;
+      }
+      &:hover > a {
+        border-left-color: @link-color;
+        color: @gray-base;
+      }
+      &.active-trail > a {
+        color: @gray-dark;
+      }
+      &.active > a {
+        border-left-color: @brand-primary;
+        color: @gray-base;
+      }
     }
 
+    // some overrides for top level links
     > li {
-      margin-bottom: @padding-base-vertical;
-
-      &:last-of-type {
-        margin-bottom: 0;
+      > .submenu-toggle {
+        margin-top: (@padding-base-vertical * 0.5);
       }
 
-      .menu-li();
-      // some overrides for top level links
-      font-size: 18px;
-      margin-bottom: 12px;
       > a {
         font-size: 18px;
-        position: relative;
-        padding-left: ((@grid-gutter-width + @padding-base-horizontal) * 0.5);
-        padding-right: (@grid-gutter-width * 0.5);
-      }
-
-      &.open {
-        > a {
-          color: @gray-dark;
-        }
+        padding: (@padding-base-vertical * 0.5) (@grid-gutter-width * 0.5) (@padding-base-vertical * 0.5) ((@grid-gutter-width + @padding-base-horizontal) * 0.5);
       }
 
       li {

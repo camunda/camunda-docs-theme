@@ -36,40 +36,25 @@
   li {
     padding: 0;
     margin-bottom: (@padding-base-vertical * 1);
-
     position: relative;
     z-index: 10;
+
     > a {
       display: block;
-
-      &:before,
-      &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        background-color: transparent;
-        width: 3px;
-        border: none;
-        z-index: 9;
-      }
-      &:before {
-        right: auto;
-        left: 0;
-      }
-      &:after {
-        right: 0;
-        left: auto;
-      }
-
-      &:hover,
-      &:focus {
-        &:before,
-        &:after {
-          background-color: @navbar-default-link-hover-bg;
-        }
-      }
+      margin-left: 2px;
+      border-left: 3px solid transparent;
+      color: @text-color;
+    }
+    &:hover > a {
+      border-left-color: @link-color;
+      color: @gray-base;
+    }
+    &.active-trail > a {
+      color: @gray-dark;
+    }
+    &.open > a {
+      border-left-color: @brand-primary;
+      color: @gray-base;
     }
 
     &:last-of-type {
@@ -84,17 +69,6 @@
     &.open {
       > ul {
         max-height: 100vh;
-      }
-    }
-
-    &.open {
-      > a,
-      > a:hover,
-      > a:focus {
-        &:before,
-        &:after {
-          background-color: @navbar-default-link-active-bg;
-        }
       }
     }
   }
@@ -121,11 +95,6 @@
       }
     }
   }
-}
-
-#TableOfContents > ul {
-  border: 1px solid @gray-lighter;
-  border-width: 0 1px;
 }
 
 .docs-banner {
