@@ -4,6 +4,31 @@
   text-align: center;
   padding: @grid-gutter-width * 0.5;
 
+  position: relative;
+  overflow: hidden;
+  &:before,
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+  &:before {
+    transform: rotateZ(-45deg);
+    border-bottom: 10px solid @body-bg;
+    left: -7px;
+    top: -2px;
+  }
+  &:after {
+    transform: rotateZ(135deg);
+    border-bottom: 10px solid @body-bg;
+    right: -7px;
+    bottom: -2px;
+  }
+
   a {
     color: @brand-primary;
     &:hover {
@@ -12,6 +37,7 @@
   }
 
   blockquote {
+    border: none;
     font-size: 16px;
     margin-bottom: 0;
     .small:before {
