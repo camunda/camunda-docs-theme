@@ -80,9 +80,7 @@ module.exports = function (grunt) {
         sourceMap: false,
         paths: [
           'node_modules',
-          'node_modules/camunda-commons-ui/resources/less',
-          'node_modules/camunda-commons-ui/lib/widgets',
-          'node_modules/camunda-commons-ui/node_modules/bootstrap/less'
+          'node_modules/camunda-commons-ui/node_modules'
         ]
       },
       styles: {
