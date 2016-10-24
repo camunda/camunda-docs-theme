@@ -2,6 +2,12 @@
   display: table;
   width: 100%;
 
+  a:hover,
+  a:focus {
+    text-shadow: none;
+    box-shadow: none;
+  }
+
   ul.major {
     width: 60px;
   }
@@ -110,6 +116,10 @@
 
   .selected-server {
     background-color: #C4C4C4;
+    a:hover,
+    a:focus {
+      .content-link(#C4C4C4);
+    }
     padding: @padding-base-vertical @padding-base-horizontal;
     position: relative;
 
