@@ -1,7 +1,10 @@
 .navbar-fixed-top {
   padding: 0;
   background-color: @body-bg;
-  border-bottom: 5px solid @brand-primary;
+  border-top: @header-border-bottom-width solid @brand-primary;
+  border-bottom: none;
+  box-shadow: @box-shadow;
+  min-height: @header-computed-height;
 }
 
 
@@ -76,7 +79,7 @@
     > li {
       .navbar-li();
       > a {
-        line-height: @header-height - 2;
+        line-height: @header-height - 0;
       }
     }
   }
@@ -91,7 +94,7 @@
   }
 
   .search-field {
-    padding-top: 10px;
+    padding-top: 9px;
     padding-right: (@grid-gutter-width * 0.5);
     width: 190px;
   }
