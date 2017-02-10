@@ -133,7 +133,7 @@ function camDownloadsWidget(info, holder) {
 
       attr(zipA, 'href', dlBasePath + dl + '.zip');
 
-      if (selectedServer === 'ibm-was' || selectedServer === 'oracle-wls') {
+      if (selectedServer.startsWith('ibm-was') || selectedServer === 'oracle-wls') {
         dl = tmpl('{vendor}-{server}/{branch}/{version}/camunda-ee-{vendor}-{server}-{version}-ee', {
           version:  version,
           branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
