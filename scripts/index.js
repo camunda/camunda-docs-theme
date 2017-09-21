@@ -479,7 +479,7 @@ var searchResultTmpl = require('lodash.template')(
   '</li>'
 );
 
-var gSearchApiKey = 'AIzaSyCMGfdDaSfjqv5zYoS0mTJnOT3e9MURWkU';
+var gSearchApiKey = 'AIzaSyBr7ZsDDbUbl_pExzErrTlSWXSZP0vpzyM';
 var gSearchCtx = '007121298374582869478:yaec0vxmc7e';
 var bodyClasses = document.body.classList;
 var searchUri = 'https://www.googleapis.com/customsearch/v1?key=' + gSearchApiKey + '&cx=' + gSearchCtx + '&q=';
