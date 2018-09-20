@@ -74,7 +74,9 @@ function camDownloadsWidget(info, holder) {
 
 
   var branches = keys(info.branches).sort(function (a, b) {
-    return (a > b ? -1 : (a < b ? 1 : 0));
+    var foo = parseInt(a.split(".")[1], 10);
+    var bar = parseInt(b.split(".")[1], 10);
+    return (foo > bar ? -1 : (foo < bar ? 1 : 0));
   });
 
 
