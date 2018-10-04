@@ -2,15 +2,14 @@
 
 ## Install
 
-Clone this repository/branch aside of the `docs.camunda.org`
+Clone this repository/branch aside of the `camunda-docs-manual`:
 
 ```sh
-# from the docs.camunda.org directory
+# from the camunda-docs-manual directory
 cd ..
-git clone git@github.com:camunda/docs.camunda.org.git docs-hugo-theme
+git clone git@github.com:camunda/camunda-docs-theme.git
 # go into its directory
-cd docs-hugo-theme
-git checkout docs-hugo-styling
+cd camunda-docs-theme
 npm i
 grunt build
 ```
@@ -48,7 +47,8 @@ Livereload should be deactivate (see `--disableLiveReload`) if you want to devel
 ```sh
 hugo --bind="0.0.0.0" --baseUrl="http://10.0.2.2:1313/manual/develop/" -w --disableLiveReload=true server
 ```
-The development site is then available on `http://10.0.2.2:1313/manual/develop/``in your virtualbox
+
+The development site is then available on `http://10.0.2.2:1313/manual/develop/` in your virtualbox
 guest OS.
 
 ## Licence
@@ -56,4 +56,4 @@ guest OS.
 [MIT](LICENSE)
 
 
-[building-docs]: https://github.com/camunda/docs.camunda.org/tree/hugo#building-the-doumentation
+[building-docs]: https://github.com/camunda/camunda-docs-manual/#building-the-documentation
