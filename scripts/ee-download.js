@@ -110,10 +110,11 @@ function camDownloadsWidget(info, holder) {
       var release = getReleaseInfo(branch, version);
       infoDiv.classList.add('accessible');
 
-      var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{server}-{version}-ee', {
+      var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{serverAlias}-{version}-ee', {
         version:  version,
         branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
-        server:   selectedServer
+        server:   selectedServer,
+        serverAlias: (selectedServer === 'wildfly8')? 'wildfly' : selectedServer
       });
 
       releaseTitle.innerHTML = version + '-ee for ' + info.servers[selectedServer];
