@@ -113,7 +113,7 @@ function camDownloadsWidget(info, holder) {
       var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{server}-{version}-ee', {
         version:  version,
         branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
-        server:   (selectedServer === 'wildfly8')? 'wildfly' : selectedServer
+        server:   selectedServer
       });
 
       releaseTitle.innerHTML = version + '-ee for ' + info.servers[selectedServer];
