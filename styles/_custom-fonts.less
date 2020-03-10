@@ -1,0 +1,34 @@
+@import "_variables.less";
+
+@font-face {
+  font-family: '@{camunda-font-family}';
+  src:  url('@{camunda-font-path}/@{camunda-font-family}.eot?6v9sgn');
+  src:  url('@{camunda-font-path}/@{camunda-font-family}.eot?6v9sgn#iefix') format('embedded-opentype'),
+    url('@{camunda-font-path}/@{camunda-font-family}.ttf?6v9sgn') format('truetype'),
+    url('@{camunda-font-path}/@{camunda-font-family}.woff?6v9sgn') format('woff'),
+    url('@{camunda-font-path}/@{camunda-font-family}.svg?6v9sgn#@{camunda-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.brand-logo {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '@{camunda-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.camunda-Icons-Circle-Black {
+  &:before {
+    content: @camunda-Icons-Circle-Black; 
+  }
+}
