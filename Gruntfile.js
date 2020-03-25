@@ -19,7 +19,7 @@ module.exports = function (grunt) {
       },
       bootstrapFonts: {
         files: [{
-          cwd: 'node_modules/camunda-commons-ui/node_modules/bootstrap/fonts/',
+          cwd: 'node_modules/bootstrap/fonts/',
           expand: true,
           src: ['**/*'],
           dest: '<%= setup.target %>/static/fonts/'
@@ -27,15 +27,7 @@ module.exports = function (grunt) {
       },
       bpmnFonts: {
         files: [{
-          cwd: 'node_modules/camunda-commons-ui/node_modules/bpmn-font/dist/font/',
-          expand: true,
-          src: ['**/*'],
-          dest: '<%= setup.target %>/static/fonts/'
-        }]
-      },
-      uiFonts: {
-        files: [{
-          cwd: 'node_modules/camunda-commons-ui/vendor/fonts/',
+          cwd: 'node_modules/bpmn-font/dist/font/',
           expand: true,
           src: ['**/*'],
           dest: '<%= setup.target %>/static/fonts/'
@@ -58,12 +50,7 @@ module.exports = function (grunt) {
         }]
       },
       images: {
-        files: [{
-          cwd: 'node_modules/camunda-commons-ui/resources/img/',
-          expand: true,
-          src: ['favicon.ico'],
-          dest: '<%= setup.target %>/static/img/'
-        },
+        files: [
         {
           cwd: 'images/',
           expand: true,
@@ -79,8 +66,7 @@ module.exports = function (grunt) {
         compress: false,
         sourceMap: false,
         paths: [
-          'node_modules',
-          'node_modules/camunda-commons-ui/node_modules'
+          'node_modules'
         ]
       },
       styles: {
@@ -107,7 +93,6 @@ module.exports = function (grunt) {
       },
       styles: {
         files: [
-          'node_modules/camunda-commons-ui/{resources/less,lib/widgets}/**/*.less',
           'styles/**/*.less'
         ],
         tasks: ['less:styles']
