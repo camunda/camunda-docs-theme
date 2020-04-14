@@ -108,6 +108,7 @@ function camDownloadsWidget(info, holder) {
     return function (s) {
       var selectedServer = servers[s];
       var release = getReleaseInfo(branch, version);
+      var excludesWar = release.excludeFormats && release.excludeFormats.indexOf('war') > -1;
       infoDiv.classList.add('accessible');
 
       var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{serverAlias}-{version}-ee', {
@@ -156,8 +157,23 @@ function camDownloadsWidget(info, holder) {
         }) + '.war');
       }
 
+      if(selectedServer.startsWith('run')) {
+        var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-{server}-ee-{version}-ee', {
+          version:  version,
+          branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
+          server:   selectedServer
+        });
+  
 
-      if (release.excludeFormats && release.excludeFormats.indexOf('war') > -1) {
+        attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
+
+        attr(zipA, 'href', dlBasePath + dl + '.zip');
+
+        excludesWar = true;
+      }
+
+
+      if (excludesWar) {
         standaloneDiv.style.display = 'none';
       }
       else {
