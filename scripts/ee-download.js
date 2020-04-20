@@ -72,6 +72,8 @@ function camDownloadsWidget(info, holder) {
   var targzA = query('a.tar-gz', holder);
   var warA = query('a.war', holder);
 
+  var runDetails = query('a.details.run', holder);
+  var fullDetails = query('a.details.full', holder);
 
   var branches = keys(info.branches).sort(function (a, b) {
     var foo = parseInt(a.split(".")[1], 10);
@@ -111,6 +113,9 @@ function camDownloadsWidget(info, holder) {
       var excludesWar = release.excludeFormats && release.excludeFormats.indexOf('war') > -1;
       infoDiv.classList.add('accessible');
 
+      runDetails.style.display = 'none';
+      fullDetails.style.display = 'inline';
+      
       var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{serverAlias}-{version}-ee', {
         version:  version,
         branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
@@ -158,6 +163,10 @@ function camDownloadsWidget(info, holder) {
       }
 
       if(selectedServer.startsWith('run')) {
+
+        runDetails.style.display = 'inline';
+        fullDetails.style.display = 'none';
+
         var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-{server}-ee-{version}-ee', {
           version:  version,
           branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
