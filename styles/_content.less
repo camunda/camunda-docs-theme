@@ -9,6 +9,13 @@ blockquote {
 
 table {
   table-layout: fixed;
+  // Fallback
+  word-break: normal;
+  overflow-wrap: break-word;
+
+  // Deprecated, but better results
+  word-break: break-word;
+
   thead,
   tbody {
     tr.collapse-bottom {
