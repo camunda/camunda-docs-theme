@@ -3,7 +3,7 @@
 
 Name = "Camunda"
 License = "MIT"
-License link = "https://github.com/yourname/yourtheme/blob/master/LICENSE.md"
+licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE.md"
 Description = ""
 Homepage = "http://siteforthistheme.com/"
 Tags = ["", ""]
