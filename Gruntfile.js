@@ -72,7 +72,7 @@ module.exports = function (grunt) {
       styles: {
         files: [{
           src: ['styles/docs.less'],
-          dest: '<%= setup.target %>/static/css/docs.css'
+          dest: '<%= setup.target %>/assets/css/docs.css'
         }]
       }
     },
@@ -81,7 +81,7 @@ module.exports = function (grunt) {
       scripts: {
         files: [{
           src: ['scripts/index.js'],
-          dest: '<%= setup.target %>/static/js/docs.js'
+          dest: '<%= setup.target %>/assets/js/docs.js'
         }]
       }
     },
@@ -106,8 +106,8 @@ module.exports = function (grunt) {
     cssmin: {
       styles: {
         files: [{
-          src: '<%= setup.target %>/static/css/docs.css',
-          dest: '<%= setup.target %>/static/css/docs.css'
+          src: '<%= setup.target %>/assets/css/docs.css',
+          dest: '<%= setup.target %>/assets/css/docs.css'
         }]
       }
     },
@@ -115,8 +115,8 @@ module.exports = function (grunt) {
     uglify: {
       scripts: {
         files: [{
-          src: '<%= setup.target %>/static/js/docs.js',
-          dest: '<%= setup.target %>/static/js/docs.js'
+          src: '<%= setup.target %>/assets/js/docs.js',
+          dest: '<%= setup.target %>/assets/js/docs.js'
         }]
       }
     },
