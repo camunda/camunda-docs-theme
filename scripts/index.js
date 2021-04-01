@@ -345,17 +345,18 @@ metaHeader.addEventListener('click', toggleMenuMeta);
 var versionSelect = query('.site-menu .meta select');
 if (versionSelect) {
   versionSelect.addEventListener('change', function () {
+
     var dest = attr(versionSelect, 'data-basepath') + '/' + versionSelect.value;
+
+    var basePath = attr(versionSelect, 'base-url');
+    var result = location.href.split(basePath)[1];
+    if (result) {
+      dest = dest + '/' + result;
+    }
+
     location.pathname = dest;
   });
 }
-
-
-
-
-
-
-
 
 
 /********************************************************************\
