@@ -40,7 +40,7 @@
     "grunt-git": "^0.3.5",
     "load-grunt-tasks": "^3.2.0",
     "lodash.template": "^4.5.0",
-    "prismjs": "0.0.1",
+    "prismjs": "1.25.0",
     "xhr": "^2.0.3"
   },
   "dependencies": {}
