@@ -24,7 +24,7 @@ and then run `npm run build` from this directory.
 
 ## Consuming the theme
 
-The simplest way to consume the theme in a project is to use the git subtree facilitites:
+The simplest way to consume the theme in a project is to use the git subtree facilities:
 
 Adding the latest version of the theme as `camunda`:
 
@@ -54,6 +54,5 @@ guest OS.
 ## Licence
 
 [MIT](LICENSE)
-
 
 [building-docs]: https://github.com/camunda/camunda-docs-manual/#building-the-documentation
