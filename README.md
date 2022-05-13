@@ -24,7 +24,14 @@ and then run `npm run build` from this directory.
 
 ## Consuming the theme
 
-The simplest way to consume the theme in a project is to use the git subtree facilities:
+1. Edit the `setup.target` value of `package.json` to point to the theme's root directory in your Hugo project (default: `../camunda-docs-manual/themes/camunda`).
+2. Build and update the theme in the target location by either running:
+   1. `grunt build` for building and syncing non-minified assets
+   2. Run additionally `grunt optimize` for building and syncing minified assets  
+
+### Using git subtree
+
+You can also consume the theme in a project via git subtree:
 
 Adding the latest version of the theme as `camunda`:
 
