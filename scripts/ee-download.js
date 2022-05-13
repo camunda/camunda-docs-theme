@@ -71,6 +71,8 @@ function camDownloadsWidget(info, holder) {
   var zipA = query('a.zip', holder);
   var targzA = query('a.tar-gz', holder);
   var warA = query('a.war', holder);
+  var licensesLinkA = query('a.licenses-link', holder);
+  var thirdPartyLicensesLinkA = query('a.third-party-licenses-link', holder);
 
   var runDetails = query('a.details.run', holder);
   var fullDetails = query('a.details.full', holder);
@@ -141,6 +143,9 @@ function camDownloadsWidget(info, holder) {
       attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
 
       attr(zipA, 'href', dlBasePath + dl + '.zip');
+
+      attr(licensesLinkA, 'href', 'https://docs.camunda.org/manual/' + branch + '/introduction/licenses/');
+      attr(thirdPartyLicensesLinkA, 'href', 'https://docs.camunda.org/manual/' + branch + '/introduction/third-party-libraries/');
 
       if (selectedServer.startsWith('ibm-was') || selectedServer === 'oracle-wls') {
         dl = tmpl('{vendor}-{server}/{branch}/{version}/camunda-ee-{vendor}-{server}-{version}-ee', {
