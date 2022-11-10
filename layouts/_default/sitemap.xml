@@ -5,9 +5,7 @@
   <url>
     {{- $permalink := .Permalink }}
     {{- if ($.Site.Params.section.versions) }}
-      {{- if (eq (index $.Site.Params.section.versions 1) $.Site.Params.section.version) }}
-        {{- $permalink = $permalink | replaceRE `(\/manual\/)([^\/]*\/)(.*)` `$1$3` }}
-      {{- end }}
+      {{- $permalink = $permalink | replaceRE `(\/manual\/)([^\/]*\/)(.*)` `$1$3` }}
     {{- end }}
     <loc>{{ $.Site.Params.canonicalBasePath }}{{ $permalink }}</loc>{{ if not .Lastmod.IsZero }}
     <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
