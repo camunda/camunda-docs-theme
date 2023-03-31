@@ -131,7 +131,7 @@ function camDownloadsWidget(info, holder) {
       releaseTitle.innerHTML = version + '-ee for ' + serverInfo.name;
       standaloneWebAppTitle.innerHTML = 'Standalone Web Application';
       standaloneWebAppHint.innerHTML = '';
-      if (version.startsWith('7.19.') && selectedServer === 'wildfly-jakartaee') {
+      if (selectedServer === 'wildfly-jakartaee') {
         standaloneWebAppTitle.innerHTML += " for WildFly ≤26 / JBoss EAP 7";
         standaloneWebAppHint.innerHTML = 'For newer Wildfly versions, standalone webapps were discontinued.';
       }
