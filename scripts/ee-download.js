@@ -66,6 +66,8 @@ function camDownloadsWidget(info, holder) {
   var standaloneDiv = query('.standalone', infoDiv);
 
   var releaseTitle = query('.info h3', holder);
+  var standaloneWebAppTitle = query('.standalone h4', holder);
+  var standaloneWebAppHint = query('.standalone p.hint', holder);
   var notesA = query('a.notes', holder);
   var dateSpan = query('span.date', holder);
   var zipA = query('a.zip', holder);
@@ -111,21 +113,28 @@ function camDownloadsWidget(info, holder) {
   function mkServerClickHandler(servers, version, branch) {
     return function (s) {
       var selectedServer = servers[s];
+      var serverInfo = info.servers[selectedServer];
       var release = getReleaseInfo(branch, version);
       var excludesWar = release.excludeFormats && release.excludeFormats.indexOf('war') > -1;
       infoDiv.classList.add('accessible');
 
       runDetails.style.display = 'none';
       fullDetails.style.display = 'inline';
-      
+
       var dl = tmpl('{server}/{branch}/{version}/camunda-bpm-ee-{serverAlias}-{version}-ee', {
         version:  version,
         branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
-        server:   selectedServer,
-        serverAlias: (selectedServer === 'wildfly8')? 'wildfly' : selectedServer
+        server:   serverInfo.path,
+        serverAlias: (selectedServer === 'wildfly8')? 'wildfly' : serverInfo.path
       });
 
-      releaseTitle.innerHTML = version + '-ee for ' + info.servers[selectedServer];
+      releaseTitle.innerHTML = version + '-ee for ' + serverInfo.name;
+      standaloneWebAppTitle.innerHTML = 'Standalone Web Application';
+      standaloneWebAppHint.innerHTML = '';
+      if (version.startsWith('7.19.') && selectedServer === 'wildfly-jakartaee') {
+        standaloneWebAppTitle.innerHTML += " for WildFly ≤26 / JBoss EAP 7";
+        standaloneWebAppHint.innerHTML = 'For newer Wildfly versions, standalone webapps were discontinued.';
+      }
 
       var parts = release.date.split('.').map(function (part) {
         return parseInt(part, 10);
@@ -177,7 +186,7 @@ function camDownloadsWidget(info, holder) {
           branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
           server:   selectedServer
         });
-  
+
 
         attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
 
@@ -210,8 +219,8 @@ function camDownloadsWidget(info, holder) {
 
       var releaseServers = getServers(releaseInfo);
 
-      return mkListItems(serverList, releaseServers.map(function (name) {
-        return info.servers[name];
+      return mkListItems(serverList, releaseServers.map(function (id) {
+        return info.servers[id].name;
       }), mkServerClickHandler(releaseServers, selectedVersion, branchName));
     };
   }
