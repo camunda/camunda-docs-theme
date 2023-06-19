@@ -119,11 +119,14 @@ body.site-menu-open .site-menu-toggle {
 }
 .navbar-top-section{
   display: flex;
-  margin:6px 0;
+  padding:8px 0;
   justify-content: flex-end;
+  height: auto;
   align-items: center;
+  border-bottom:1px solid #ccc;
   span,a{
-    margin:5px;
+    display: inline-block;
+    margin:0 10px;
   }
   span{
     color:#000;
@@ -135,9 +138,14 @@ body.site-menu-open .site-menu-toggle {
   a:last-child{
     border:1px solid #000;
     color:#000;
-    padding:2px 4px;
+    padding:2px 8px;
     box-shadow: 2px 2px 2px rgba(0,0,0,.9);
+    transition: all 1.5 ease;
     text-decoration: none;
+    &:hover{
+      background: #000;
+      color:#fff;
+    }
   }
 }
 
