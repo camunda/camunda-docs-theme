@@ -162,7 +162,7 @@ function camDownloadsWidget(info, holder) {
           branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
           vendor:   selectedServer.split('-')[0],
           server:   (selectedServer == 'ibm-was-liberty')? 'was-liberty' : selectedServer.split('-')[1],
-          serverAlias:   selectedServer.split('-')[1],
+          serverAlias:   selectedServer.split('-')[1]
         });
 
         attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
