@@ -157,11 +157,12 @@ function camDownloadsWidget(info, holder) {
       attr(thirdPartyLicensesLinkA, 'href', 'https://docs.camunda.org/manual/' + branch + '/introduction/third-party-libraries/');
 
       if (selectedServer.startsWith('ibm-was') || selectedServer === 'oracle-wls') {
-        dl = tmpl('{vendor}-{server}/{branch}/{version}/camunda-ee-{vendor}-{server}-{version}-ee', {
+        dl = tmpl('{vendor}-{server}/{branch}/{version}/camunda-ee-{vendor}-{serverAlias}-{version}-ee', {
           version:  version,
           branch:   (version.indexOf('alpha') > -1) ? 'nightly' : branch,
           vendor:   selectedServer.split('-')[0],
-          server:   selectedServer.split('-')[1]
+          server:   (selectedServer == 'ibm-was-liberty')? 'was-liberty' : selectedServer.split('-')[1],
+          serverAlias:   selectedServer.split('-')[1],
         });
 
         attr(targzA, 'href', dlBasePath + dl + '.tar.gz');
