@@ -39,7 +39,8 @@
 .search-results {
   opacity: 0;
   position: fixed;
-  top: @header-height;
+  /* Prevents the search results from being hidden at any screen size, because our top nav height varies a lot. */
+  top: 123px;
   left: 5%;
   right: 5%;
   overflow: hidden;
