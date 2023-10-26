@@ -44,7 +44,7 @@
   left: 5%;
   right: 5%;
   overflow: hidden;
-  z-index: 7;
+  z-index: 0;
 
   transform: translateY(0 - (@grid-gutter-width * 2));
   transition: transform 0.218s ease, opacity 0.218s ease;
@@ -138,6 +138,7 @@ body.search-open {
   .search-results {
     opacity: 1;
     transform: translateY(0);
+    z-index: 7;
     ul {
       max-height: 500px;
     }
