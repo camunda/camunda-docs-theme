@@ -21,7 +21,7 @@
   <meta name="keywords" content="camunda, open source, free, Apache License, Apache 2.0, workflow, BPMN, BPMN 2.0, camunda.org, bpm, BPMS, engine, platform, process, automation, community, documentation" />
   <meta name="author" content="Camunda 7 community" />
   {{ if ($.Site.Params.section.versions)}}
-    {{ if (not (eq (index $.Site.Params.section.versions 1) $.Site.Params.section.version))}}
+    {{ if (not (eq "latest" $.Site.Params.section.version))}}
       <meta name="robots" content="noindex" />
     {{ end }}
   {{ end }}
