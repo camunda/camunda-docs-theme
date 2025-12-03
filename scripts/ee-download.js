@@ -68,7 +68,8 @@ function camDownloadsWidget(info, holder) {
   var releaseTitle = query('.info h3', holder);
   var standaloneWebAppTitle = query('.standalone h4', holder);
   var standaloneWebAppHint = query('.standalone p.hint', holder);
-  var notesA = query('a.notes', holder);
+  var notes = query('span.notes', holder);
+  var notesA = query('span.notes a', holder);
   var dateSpan = query('span.date', holder);
   var zipA = query('a.zip', holder);
   var targzA = query('a.tar-gz', holder);
@@ -141,7 +142,12 @@ function camDownloadsWidget(info, holder) {
       });
       dateSpan.innerHTML = parts[2] + ' ' + months[parts[1] - 1] + ' ' + parts[0];
 
-      attr(notesA, 'href', release.note);
+      if (release.note) {
+        attr(notesA, 'href', release.note);
+        notes.style.display = 'inline';
+      } else {
+        notes.style.display = 'none';
+      }
 
       attr(warA, 'href', dlBasePath + tmpl('{server}/{branch}/{version}/camunda-webapp-ee-{server}-standalone-{version}-ee', {
         version:  version,
